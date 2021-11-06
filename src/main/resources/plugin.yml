@@ -1,0 +1,9 @@
+main: com.astrainteractive.astranpcs.AstraNPCS
+name: AstraNPCS
+version: 1.0
+author: MakeevRoman
+api-version: 1.13
+softdepend: []
+depend: []
+commands:
+  anpc:
