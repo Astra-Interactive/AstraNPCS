@@ -1,8 +1,10 @@
 main: com.astrainteractive.astranpcs.AstraNPCS
 name: AstraNPCS
-version: 1.0
+version: '${project.version}'
 author: MakeevRoman
-api-version: 1.13
+authors: [ MakeevRoman ]
+website: AstraInteractive.ru
+api-version: 1.17
 softdepend: []
 depend: []
 commands:

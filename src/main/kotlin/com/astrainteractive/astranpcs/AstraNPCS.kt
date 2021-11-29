@@ -3,6 +3,7 @@ package com.astrainteractive.astranpcs
 import com.astrainteractive.astralibs.AstraLibs
 import com.astrainteractive.astralibs.Logger
 import com.astrainteractive.empireprojekt.npc.commands.CommandManager
+import org.bukkit.event.HandlerList
 import org.bukkit.plugin.java.JavaPlugin
 
 class AstraNPCS: JavaPlugin() {
@@ -26,6 +27,8 @@ class AstraNPCS: JavaPlugin() {
     }
 
     override fun onDisable() {
+        HandlerList.unregisterAll()
+
         npcManager?.onDisable()
     }
     fun reload(){
