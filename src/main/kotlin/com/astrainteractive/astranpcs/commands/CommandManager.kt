@@ -1,4 +1,4 @@
-package com.astrainteractive.empireprojekt.npc.commands
+package com.astrainteractive.astranpcs.commands
 
 import com.astrainteractive.astranpcs.AstraNPCS
 

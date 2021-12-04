@@ -2,22 +2,24 @@ package com.astrainteractive.astranpcs
 
 import com.astrainteractive.astralibs.AstraUtils
 import com.astrainteractive.astralibs.HEX
+import com.astrainteractive.astranpcs.data.EmpireNPC
+import com.astrainteractive.astranpcs.data.Skin
 import com.google.gson.JsonParser
-import com.astrainteractive.empireprojekt.npc.data.EmpireNPC
-import com.astrainteractive.empireprojekt.npc.data.Skin
 import com.mojang.authlib.GameProfile
 import com.mojang.authlib.properties.Property
 import net.minecraft.network.protocol.game.*
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.EntityPlayer
 import net.minecraft.server.network.PlayerConnection
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.player.EntityHuman
 import org.bukkit.Bukkit
 import org.bukkit.Location
-import org.bukkit.craftbukkit.v1_17_R1.CraftServer
-import org.bukkit.craftbukkit.v1_17_R1.CraftWorld
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftArmorStand
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer
-import org.bukkit.craftbukkit.v1_17_R1.util.CraftChatMessage
+import org.bukkit.craftbukkit.v1_18_R1.CraftServer
+import org.bukkit.craftbukkit.v1_18_R1.CraftWorld
+import org.bukkit.craftbukkit.v1_18_R1.entity.CraftArmorStand
+import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer
+import org.bukkit.craftbukkit.v1_18_R1.util.CraftChatMessage
 import org.bukkit.entity.ArmorStand
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
@@ -28,12 +30,12 @@ import java.lang.Exception
 import java.net.URL
 import java.util.*
 
-class AbstractNPC(val npc: EmpireNPC) {
+class RealNPC(val npc: EmpireNPC) {
 
     private var armorStands: List<ArmorStand> = listOf()
     public lateinit var nmsNpc: EntityPlayer
     val id: Int
-        get() = nmsNpc.id
+        get() = (nmsNpc as Entity).hashCode()
     val location: Location
         get() = npc.location
 
@@ -62,7 +64,7 @@ class AbstractNPC(val npc: EmpireNPC) {
      * Конвертация локации из BukkitAPI в Native MinecraftAPI
      */
     private fun EntityPlayer.setLocation(l: Location) {
-        this.setLocation(l.x, l.y, l.z, l.yaw, l.pitch)
+        (this as Entity).a(l.x, l.y, l.z, l.yaw, l.pitch)
     }
 
     /**
@@ -94,7 +96,7 @@ class AbstractNPC(val npc: EmpireNPC) {
      * Set skin
      */
     fun setSkin(skin: Skin) {
-        nmsNpc.profile.properties.put(
+        (nmsNpc as EntityHuman).fp() .properties.put(
             "textures",
             Property("textures", skin.value, skin.signature)
         )
@@ -105,33 +107,15 @@ class AbstractNPC(val npc: EmpireNPC) {
      * Set skin by Name
      */
     fun setSkinByName(playerName: String) {
-        val skin = getSkinByPlayerName(playerName) ?: return
+        val skin = Skin.getSkinByName(playerName) ?: return
         npc.skin = skin
         despawnNPC()
         spawnNPC()
-        NPCManager.saveNPC(npc)
+        npc.save()
     }
 
 
-    /**
-     * Download skin from player
-     */
-    private fun getSkinByPlayerName(name: String): Skin? {
-        return try {
-            val url = URL("https://api.mojang.com/users/profiles/minecraft/$name")
-            val reader = InputStreamReader(url.openStream())
-            val uuid = JsonParser().parse(reader).asJsonObject.get("id").asString
-            val url2 = URL("https://sessionserver.mojang.com/session/minecraft/profile/$uuid?unsigned=false")
-            val reader2 = InputStreamReader(url2.openStream())
-            val property =
-                JsonParser().parse(reader2).asJsonObject.get("properties").asJsonArray.get(0).asJsonObject
-            val value = property.get("value").asString
-            val signature = property.get("signature").asString
-            Skin(value, signature)
-        } catch (e: Exception) {
-            null
-        }
-    }
+
 
 
     /**
@@ -145,7 +129,7 @@ class AbstractNPC(val npc: EmpireNPC) {
 
         despawnNPC()
         spawnNPC()
-        NPCManager.saveNPC(npc)
+        npc.save()
 //        setName()
 //        showNPCToOnlinePlayers()
 //        if (npc.skin != null)
@@ -158,7 +142,7 @@ class AbstractNPC(val npc: EmpireNPC) {
      * Creating npc packet to shop npc to player
      */
     private fun spawnNPCPacket(connection: PlayerConnection) {
-        connection.sendPacket(
+        connection.a(
             PacketPlayOutPlayerInfo(
                 PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a,
                 nmsNpc
@@ -184,9 +168,9 @@ class AbstractNPC(val npc: EmpireNPC) {
         val connection = player.connection()
         val npcLoc = nmsNpc.bukkitEntity.location
         val newLoc = npcLoc.setDirection(player.location.subtract(npcLoc).toVector())
-        connection.sendPacket(
+        connection.a(
             PacketPlayOutEntity.PacketPlayOutEntityLook(
-                nmsNpc.id,
+                id,
                 newLoc.yaw.toAngle(),
                 newLoc.pitch.toAngle(),
                 false
@@ -196,9 +180,9 @@ class AbstractNPC(val npc: EmpireNPC) {
             AstraNPCS.instance,
             Runnable {
                 spawnNPCPacket(connection)
-            }, NPCManager.npcConfig.spawnNPCPacketTime
+            }, 200
         )
-        connection.sendPacket(PacketPlayOutEntityHeadRotation(nmsNpc, newLoc.yaw.toAngle()))
+        connection.a(PacketPlayOutEntityHeadRotation(nmsNpc, newLoc.yaw.toAngle()))
     }
 
 
@@ -228,7 +212,7 @@ class AbstractNPC(val npc: EmpireNPC) {
     private fun hideArmorStandsForPlayer(player: Player) {
         val connection = player.connection()
         for (stand in armorStands) {
-            connection.sendPacket(PacketPlayOutEntityDestroy(stand.asEntityArmorStand().id))
+            connection.a(PacketPlayOutEntityDestroy((stand.asEntityArmorStand() as Entity).hashCode()))
         }
     }
 
@@ -240,9 +224,9 @@ class AbstractNPC(val npc: EmpireNPC) {
         for (stand in armorStands) {
             val entityArmorStand = stand.asEntityArmorStand()
             val packetPlayOutSpawnEntity = PacketPlayOutSpawnEntity(entityArmorStand);
-            val metadata = PacketPlayOutEntityMetadata(entityArmorStand.id, entityArmorStand.dataWatcher, true);
-            connection.sendPacket(packetPlayOutSpawnEntity)
-            connection.sendPacket(metadata)
+            val metadata = PacketPlayOutEntityMetadata((entityArmorStand as Entity).hashCode(), (entityArmorStand as Entity).ai(), true);
+            connection.a(packetPlayOutSpawnEntity)
+            connection.a(metadata)
         }
     }
 
@@ -261,13 +245,13 @@ class AbstractNPC(val npc: EmpireNPC) {
     public fun hideNPCForPlayer(player: Player) {
         val connection = player.connection()
 
-        connection.sendPacket(
+        connection.a(
             PacketPlayOutPlayerInfo(
                 PacketPlayOutPlayerInfo.EnumPlayerInfoAction.e,
                 nmsNpc
             )
         )//WARNING EnumPlayerInfoAction.e==EnumPlayerInfoAction.REMOVE_PLAYER
-        connection.sendPacket(PacketPlayOutEntityDestroy(nmsNpc.id))
+        connection.a(PacketPlayOutEntityDestroy(id))
         hideArmorStandsForPlayer(player)
     }
 
@@ -287,7 +271,7 @@ class AbstractNPC(val npc: EmpireNPC) {
     fun showNPCToPlayer(player: Player) {
         val connection = player.connection()//WARNING handle.b==handle.playerConnection
         spawnNPCPacket(connection)
-        connection.sendPacket(PacketPlayOutNamedEntitySpawn(nmsNpc))
+        connection.a(PacketPlayOutNamedEntitySpawn(nmsNpc))
         showArmorStandsToPlayer(player)
     }
 

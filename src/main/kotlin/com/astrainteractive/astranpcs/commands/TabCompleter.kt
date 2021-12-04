@@ -1,4 +1,4 @@
-package com.astrainteractive.empireprojekt.npc.commands
+package com.astrainteractive.astranpcs.commands
 
 import com.astrainteractive.astralibs.withEntry
 import com.astrainteractive.astranpcs.NPCManager
@@ -28,13 +28,8 @@ class TabCompleter : TabCompleter {
                 "name"
             ).withEntry(args[0])
         if (args.size == 2 && listOf("tp", "move", "skin", "delete", "line_remove","line_add", "phrase_remove","phrase_add","name").contains(args[0]))
-            return NPCManager.abstractNPCByName.keys.toList().withEntry(args[1])
+            return listOf()//NPCManager.npcDataKeys.withEntry(args[1])
 
-        if (args.size == 3 && args.getOrNull(0).equals("changeLine"))
-            return listOf(NPCManager.abstractNPCByName[args.getOrNull(1) ?: ""]?.npc?.lines?.size?.toString() ?: "0")
-
-        if (args.size == 3 && args.getOrNull(0).equals("changePhrase"))
-            return listOf(NPCManager.abstractNPCByName[args.getOrNull(1) ?: ""]?.npc?.phrases?.size?.toString() ?: "0")
         return listOf()
     }
 }

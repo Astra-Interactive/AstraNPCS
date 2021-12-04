@@ -45,7 +45,7 @@ class ProtocolLibPacketListener: IAstraListener {
                             AstraNPCS.instance.server.pluginManager.callEvent(
                                 RightClickNPC(
                                     player,
-                                    NPCManager.abstractNPCByID[npcID] ?: return@callSyncMethod
+                                    NPCManager.realNpcByEntityId[npcID] ?: return@callSyncMethod
                                 )
                             )
                         }
