@@ -32,22 +32,22 @@ class Commands : CommandExecutor {
     private fun setNpcSkin(sender: Player, label: String, args: Array<out String>) {
         if (args.size != 3)
             return
-//        if (NPCManager.abstractNPCByEmpireId.containsKey(args[1]))
-//            NPCManager.abstractNPCByEmpireId[args[1]]!!.setSkinByName(args[2])
+        if (NPCManager.realNpcByEmpireId.containsKey(args[1]))
+            NPCManager.realNpcByEmpireId[args[1]]!!.setSkinByName(args[2])
     }
 
     private fun moveNpcToPlayer(sender: Player, label: String, args: Array<out String>) {
         if (args.size != 2)
             return
-//        if (NPCManager.abstractNPCByEmpireId.containsKey(args[1]))
-//            NPCManager.abstractNPCByEmpireId[args[1]]!!.setLocation(sender.location)
+        if (NPCManager.realNpcByEmpireId.containsKey(args[1]))
+            NPCManager.realNpcByEmpireId[args[1]]!!.setLocation(sender.location)
     }
 
     private fun teleportToNpc(sender: Player, label: String, args: Array<out String>) {
 
         if (args.size != 2)
             return
-//        if (NPCManager.abstractNPCByEmpireId.containsKey(args[1]))
-//            sender.teleport(NPCManager.abstractNPCByEmpireId[args[1]]!!.location)
+        if (NPCManager.realNpcByEmpireId.containsKey(args[1]))
+            sender.teleport(NPCManager.realNpcByEmpireId[args[1]]!!.location)
     }
 }

@@ -16,7 +16,6 @@ class TabCompleter : TabCompleter {
         if (args.size == 1)
             return listOf(
                 "tp",
-                "create",
                 "reload",
                 "skin",
                 "move",
@@ -28,7 +27,7 @@ class TabCompleter : TabCompleter {
                 "name"
             ).withEntry(args[0])
         if (args.size == 2 && listOf("tp", "move", "skin", "delete", "line_remove","line_add", "phrase_remove","phrase_add","name").contains(args[0]))
-            return listOf()//NPCManager.npcDataKeys.withEntry(args[1])
+            return NPCManager.empireNPCList.map { it.id }.withEntry(args[1])
 
         return listOf()
     }

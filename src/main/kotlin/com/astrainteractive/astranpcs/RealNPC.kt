@@ -43,21 +43,15 @@ class RealNPC(val npc: EmpireNPC) {
      * Установка имени NPC
      */
     private fun setName() {
-        var offset = 0.0
-        val mArmorStands = mutableListOf<ArmorStand>()
-        for (line in npc.lines ?: listOf()) {
-            val location = npc.location.clone().add(0.0, offset, 0.0)
-            val armorStand = (location.world?.spawnEntity(location, EntityType.ARMOR_STAND) as ArmorStand).apply {
+        armorStands = npc.lines?.mapIndexed { i, line ->
+            val location = npc.location.clone().add(0.0, 0.2 * i, 0.0)
+            (location.world?.spawnEntity(location, EntityType.ARMOR_STAND) as ArmorStand).apply {
                 customName = AstraUtils.HEXPattern(line)
                 isCustomNameVisible = true
                 isInvisible = true
                 isInvulnerable = true
             }
-
-            offset += 0.2
-            mArmorStands.add(armorStand)
-        }
-        armorStands = mArmorStands
+        } ?: listOf()
     }
 
     /**
@@ -87,21 +81,20 @@ class RealNPC(val npc: EmpireNPC) {
     }
 
 
-    fun despawnNPC() {
+    fun despawnNPC() =
         hideNPCFromOnlinePlayers()
-    }
+
 
 
     /**
      * Set skin
      */
-    fun setSkin(skin: Skin) {
-        (nmsNpc as EntityHuman).fp() .properties.put(
+    fun setSkin(skin: Skin) =
+        (nmsNpc as EntityHuman).fp().properties.put(
             "textures",
             Property("textures", skin.value, skin.signature)
         )
 
-    }
 
     /**
      * Set skin by Name
@@ -113,9 +106,6 @@ class RealNPC(val npc: EmpireNPC) {
         spawnNPC()
         npc.save()
     }
-
-
-
 
 
     /**
@@ -189,16 +179,16 @@ class RealNPC(val npc: EmpireNPC) {
     /**
      * Get connection of player
      */
-    private fun Player.connection(): PlayerConnection {
-        return (this as CraftPlayer).handle.b
-    }
+    private fun Player.connection(): PlayerConnection =
+         (this as CraftPlayer).handle.b
+
 
     /**
      * Convert float angle to byte angle for minecraft packet
      */
-    private fun Float.toAngle(): Byte {
-        return (this * 256 / 360).toInt().toByte()
-    }
+    private fun Float.toAngle(): Byte =
+         (this * 256 / 360).toInt().toByte()
+
 
 
     /**
@@ -209,12 +199,11 @@ class RealNPC(val npc: EmpireNPC) {
     /**
      * Hide Armor stand from player
      */
-    private fun hideArmorStandsForPlayer(player: Player) {
-        val connection = player.connection()
-        for (stand in armorStands) {
-            connection.a(PacketPlayOutEntityDestroy((stand.asEntityArmorStand() as Entity).hashCode()))
+    private fun hideArmorStandsForPlayer(player: Player) =
+        armorStands.forEach { stand ->
+            player.connection().a(PacketPlayOutEntityDestroy((stand.asEntityArmorStand() as Entity).hashCode()))
         }
-    }
+
 
     /**
      * Show armor stand for Player
@@ -224,7 +213,11 @@ class RealNPC(val npc: EmpireNPC) {
         for (stand in armorStands) {
             val entityArmorStand = stand.asEntityArmorStand()
             val packetPlayOutSpawnEntity = PacketPlayOutSpawnEntity(entityArmorStand);
-            val metadata = PacketPlayOutEntityMetadata((entityArmorStand as Entity).hashCode(), (entityArmorStand as Entity).ai(), true);
+            val metadata = PacketPlayOutEntityMetadata(
+                (entityArmorStand as Entity).hashCode(),
+                (entityArmorStand as Entity).ai(),
+                true
+            );
             connection.a(packetPlayOutSpawnEntity)
             connection.a(metadata)
         }
@@ -281,7 +274,6 @@ class RealNPC(val npc: EmpireNPC) {
     fun showNPCToOnlinePlayers() {
         for (p in Bukkit.getOnlinePlayers())
             showNPCToPlayer(p)
-
     }
 
 

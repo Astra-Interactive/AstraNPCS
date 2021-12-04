@@ -4,6 +4,7 @@ import com.astrainteractive.astralibs.AstraLibs
 import com.astrainteractive.astralibs.FileManager
 import com.astrainteractive.astralibs.Logger
 import com.astrainteractive.astranpcs.commands.CommandManager
+import com.astrainteractive.empireprojekt.npc.interact.EventManager
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.event.HandlerList
 import org.bukkit.plugin.java.JavaPlugin
@@ -20,6 +21,7 @@ class AstraNPCS: JavaPlugin() {
      */
     var npcManager: NPCManager? = null
         private set
+    private lateinit var eventManager: EventManager
 
     override fun onEnable() {
         AstraLibs.create(this)
@@ -28,9 +30,11 @@ class AstraNPCS: JavaPlugin() {
         instance = this
         npcManager = NPCManager()
         CommandManager()
+        eventManager = EventManager()
     }
 
     override fun onDisable() {
+        eventManager.onDisable()
         HandlerList.unregisterAll()
 
         npcManager?.onDisable()

@@ -11,22 +11,24 @@ class NPCManager {
     companion object {
 
         fun playerQuitEvent(player: Player) {
-            runAsyncTask {
-                for (npc in realNPCList)
-                    npc.hideNPCForPlayer(player)
-                playerSpawnedNpcs[player]?.clear() ?: return@runAsyncTask
-            }
+            playerSpawnedNpcs[player.name]?.clear() ?: return
+            isThreadActive.remove(player.name)
+        }
+
+
+        fun playerJoinEvent(player: Player) {
+            playerSpawnedNpcs[player.name] = mutableSetOf()
         }
 
         private fun Player.hideNPC(npc: RealNPC) {
-            playerSpawnedNpcs[this]?.remove(npc)
+            playerSpawnedNpcs[this.name]?.remove(npc)
             npc.hideNPCForPlayer(this)
         }
 
         private fun Player.showNPC(npc: RealNPC) {
-            if (playerSpawnedNpcs[this]!!.contains(npc))
+            if (playerSpawnedNpcs[this.name]!!.contains(npc))
                 return
-            playerSpawnedNpcs[this]?.add(npc)
+            playerSpawnedNpcs[this.name]?.add(npc)
             npc.showNPCToPlayer(this)
         }
 
@@ -41,13 +43,11 @@ class NPCManager {
             isThreadActive.add(p.name)
 
             runAsyncTask {
-                for (npc in realNPCList) {
+                realNPCList.forEach { npc ->
                     if (p.location.world != npc.location.world)
-                        continue
+                        return@forEach
                     val dist = p.location.distance(npc.location)
                     synchronized(this) {
-                        if (!realNPCList.contains(npc))
-                            return@synchronized
                         when {
                             dist > 30 -> p.hideNPC(npc)
                             dist > 10 -> p.showNPC(npc)
@@ -64,19 +64,7 @@ class NPCManager {
             }
         }
 
-        fun playerJoinEvent(player: Player) {
-            runAsyncTask {
-                for (npc in realNPCList)
-                    npc.showNPCToPlayer(player)
-                playerSpawnedNpcs[player] = mutableSetOf()
-            }
-        }
 
-
-        /**
-         * File with config and NPCS
-         */
-        lateinit var fileManager: FileManager
 
 
         /**
@@ -104,7 +92,7 @@ class NPCManager {
         /**
          * List of spawned NPCS, which in range of player
          */
-        val playerSpawnedNpcs: MutableMap<Player, MutableSet<RealNPC>> = mutableMapOf()
+        val playerSpawnedNpcs: MutableMap<String, MutableSet<RealNPC>> = mutableMapOf()
 
         /**
          * List of active npc track threads for player
@@ -120,16 +108,12 @@ class NPCManager {
         isThreadActive.clear()
     }
 
-    private lateinit var eventManager: EventManager
 
     private fun onEnable() {
-        fileManager = FileManager("npcs.yml")
-
         empireNPCList = EmpireNPC.getList().toMutableSet()
         realNPCList = empireNPCList.map {
             RealNPC(it).apply { spawnNPC() }
         }.toMutableList()
-        eventManager = EventManager()
 
 
     }
@@ -138,8 +122,8 @@ class NPCManager {
         if (AstraNPCS.instance.server.pluginManager.getPlugin("ProtocolLib") != null)
             onEnable()
 
-        for (player in Bukkit.getOnlinePlayers()) {
-            playerSpawnedNpcs[player] = mutableSetOf()
+        Bukkit.getOnlinePlayers().forEach { player ->
+            playerSpawnedNpcs[player.name] = mutableSetOf()
         }
     }
 
@@ -148,7 +132,6 @@ class NPCManager {
             return
         for (npc in realNPCList)
             npc.onDisable()
-        eventManager.onDisable()
         clearListAndMap()
     }
 }

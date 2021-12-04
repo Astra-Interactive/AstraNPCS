@@ -3,6 +3,7 @@ package com.astrainteractive.astranpcs.data
 
 import com.astrainteractive.astralibs.HEX
 import com.astrainteractive.astralibs.catchingNoStackTrace
+import com.astrainteractive.astralibs.getHEXStringList
 import com.astrainteractive.astranpcs.AstraNPCS
 import com.google.gson.JsonParser
 import org.bukkit.Location
@@ -26,8 +27,8 @@ data class EmpireNPC(
             return config.getKeys(false).mapNotNull { id ->
                 val c = config.getConfigurationSection(id) ?: return@mapNotNull null
                 val name = c.getString("name")?.HEX()
-                val lines = c.getStringList("lines")
-                val phrases = c.getStringList("phrases")
+                val lines = c.getHEXStringList("lines")
+                val phrases = c.getHEXStringList("phrases")
                 val commands = Command.getCommands(c.getConfigurationSection("commands"))
                 val skin = Skin.getSkin(c.getConfigurationSection("skin"))
                 val location = c.getLocation("location")?:return@mapNotNull null
