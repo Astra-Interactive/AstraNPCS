@@ -1,7 +1,7 @@
 package com.astrainteractive.astranpcs.commands
 
 import com.astrainteractive.astralibs.withEntry
-import com.astrainteractive.astranpcs.NPCManager
+import com.astrainteractive.astranpcs.api.NPCManager
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
@@ -27,7 +27,7 @@ class TabCompleter : TabCompleter {
                 "name"
             ).withEntry(args[0])
         if (args.size == 2 && listOf("tp", "move", "skin", "delete", "line_remove","line_add", "phrase_remove","phrase_add","name").contains(args[0]))
-            return NPCManager.empireNPCList.map { it.id }.withEntry(args[1])
+            return NPCManager.registeredNPCs.map { it.empireId }.withEntry(args[1])
 
         return listOf()
     }

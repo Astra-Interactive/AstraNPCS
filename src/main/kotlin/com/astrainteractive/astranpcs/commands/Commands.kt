@@ -1,7 +1,7 @@
 package com.astrainteractive.astranpcs.commands
 
 import com.astrainteractive.astranpcs.AstraNPCS
-import com.astrainteractive.astranpcs.NPCManager
+import com.astrainteractive.astranpcs.api.NPCManager
 import com.astrainteractive.astranpcs.utils.Permissions
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -32,22 +32,22 @@ class Commands : CommandExecutor {
     private fun setNpcSkin(sender: Player, label: String, args: Array<out String>) {
         if (args.size != 3)
             return
-        if (NPCManager.realNpcByEmpireId.containsKey(args[1]))
-            NPCManager.realNpcByEmpireId[args[1]]!!.setSkinByName(args[2])
+        val npc = NPCManager.npcByEmpireId(args[1])?:return
+        npc.setSkinByName(args[2]?:return)
     }
 
     private fun moveNpcToPlayer(sender: Player, label: String, args: Array<out String>) {
         if (args.size != 2)
             return
-        if (NPCManager.realNpcByEmpireId.containsKey(args[1]))
-            NPCManager.realNpcByEmpireId[args[1]]!!.setLocation(sender.location)
+        val npc = NPCManager.npcByEmpireId(args[1])
+        npc?.setLocation(sender.location)
     }
 
     private fun teleportToNpc(sender: Player, label: String, args: Array<out String>) {
 
         if (args.size != 2)
             return
-        if (NPCManager.realNpcByEmpireId.containsKey(args[1]))
-            sender.teleport(NPCManager.realNpcByEmpireId[args[1]]!!.location)
+        val npc = NPCManager.npcByEmpireId(args[1])
+        sender.teleport(npc?.location?:return)
     }
 }

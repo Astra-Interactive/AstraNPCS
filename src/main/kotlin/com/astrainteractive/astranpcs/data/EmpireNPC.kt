@@ -23,7 +23,7 @@ data class EmpireNPC(
     companion object {
 
         fun getList(): List<EmpireNPC> {
-            val config = AstraNPCS.npcs.getConfig().getConfigurationSection("npcs")?:return listOf()
+            val config = AstraNPCS.npcsConfig.getConfig().getConfigurationSection("npcs")?:return listOf()
             return config.getKeys(false).mapNotNull { id ->
                 val c = config.getConfigurationSection(id) ?: return@mapNotNull null
                 val name = c.getString("name")?.HEX()
@@ -45,7 +45,7 @@ data class EmpireNPC(
         }
     }
     fun save(){
-        val c = AstraNPCS.npcs.getConfig()
+        val c = AstraNPCS.npcsConfig.getConfig()
         c.set("$id.name",name)
         c.set("$id.lines",lines)
         c.set("$id.phrases",phrases)
@@ -56,7 +56,7 @@ data class EmpireNPC(
         c.set("$id.skin.value",skin?.value)
         c.set("$id.skin.signature",skin?.signature)
         c.set("$id.location",location)
-        AstraNPCS.npcs.saveConfig()
+        AstraNPCS.npcsConfig.saveConfig()
     }
 }
 

@@ -1,23 +1,18 @@
-package com.astrainteractive.empireprojekt.npc.interact
+package com.astrainteractive.astranpcs.api
 
-import com.astrainteractive.astranpcs.RealNPC
 import org.bukkit.entity.Player
 import org.bukkit.event.Cancellable
 import org.bukkit.event.Event
 import org.bukkit.event.HandlerList
 
-class RightClickNPC(val player: Player, val npc: RealNPC) : Event(), Cancellable {
-
-
+class NPCInteractionEvent(val player:Player,val clicked: NPC):Event(),Cancellable {
     private var isCancelled = false
     override fun isCancelled(): Boolean {
         return isCancelled
     }
-
     override fun setCancelled(cancel: Boolean) {
         isCancelled = cancel
     }
-
     override fun getHandlers(): HandlerList {
         return HANDLERS
     }
@@ -27,11 +22,6 @@ class RightClickNPC(val player: Player, val npc: RealNPC) : Event(), Cancellable
         fun getHandlerList(): HandlerList = HANDLERS
     }
 }
-
-
-
-
-
 
 
 
