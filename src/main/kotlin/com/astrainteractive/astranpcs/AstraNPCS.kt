@@ -37,7 +37,7 @@ class AstraNPCS: JavaPlugin() {
 
     override fun onDisable() {
         eventManager.onDisable()
-        HandlerList.unregisterAll()
+        HandlerList.unregisterAll(this)
         npcManager.onDisable()
     }
     fun reload(){

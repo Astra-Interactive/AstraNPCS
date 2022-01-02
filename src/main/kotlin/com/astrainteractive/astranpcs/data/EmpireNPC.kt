@@ -3,9 +3,11 @@ package com.astrainteractive.astranpcs.data
 
 import com.astrainteractive.astralibs.HEX
 import com.astrainteractive.astralibs.catchingNoStackTrace
+import com.astrainteractive.astralibs.getFloat
 import com.astrainteractive.astralibs.getHEXStringList
 import com.astrainteractive.astranpcs.AstraNPCS
 import com.google.gson.JsonParser
+import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.configuration.ConfigurationSection
 import java.io.InputStreamReader
@@ -21,7 +23,15 @@ data class EmpireNPC(
     var location: Location
 ) {
     companion object {
-
+//        fun ConfigurationSection.getLocation(): Location {
+//            val world = getString("world")?:"world"
+//            val x = getDouble("x",0.0)
+//            val y = getDouble("y",0.0)
+//            val z = getDouble("z",0.0)
+//            val pitch = getFloat("pitch",0.0f)
+//            val yaw = getFloat("yaw",0.0f)
+//            return Location(Bukkit.getWorld(world),x,y,z,yaw,pitch)
+//        }
         fun getList(): List<EmpireNPC> {
             val config = AstraNPCS.npcsConfig.getConfig().getConfigurationSection("npcs")?:return listOf()
             return config.getKeys(false).mapNotNull { id ->
@@ -46,16 +56,16 @@ data class EmpireNPC(
     }
     fun save(){
         val c = AstraNPCS.npcsConfig.getConfig()
-        c.set("$id.name",name)
-        c.set("$id.lines",lines)
-        c.set("$id.phrases",phrases)
+        c.set("npcs.$id.name",name)
+        c.set("npcs.$id.lines",lines)
+        c.set("npcs.$id.phrases",phrases)
         commands.forEach {cmd->
-            c.set("$id.commands.${cmd.id}.command",cmd.command)
-            c.set("$id.commands.${cmd.id}.asConsole",cmd.asConsole)
+            c.set("npcs.$id.commands.${cmd.id}.command",cmd.command)
+            c.set("npcs.$id.commands.${cmd.id}.asConsole",cmd.asConsole)
         }
-        c.set("$id.skin.value",skin?.value)
-        c.set("$id.skin.signature",skin?.signature)
-        c.set("$id.location",location)
+        c.set("npcs.$id.skin.value",skin?.value)
+        c.set("npcs.$id.skin.signature",skin?.signature)
+        c.set("npcs.$id.location",location)
         AstraNPCS.npcsConfig.saveConfig()
     }
 }

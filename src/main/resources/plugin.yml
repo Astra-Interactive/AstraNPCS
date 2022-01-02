@@ -6,6 +6,6 @@ authors: [ MakeevRoman ]
 website: AstraInteractive.ru
 api-version: 1.17
 softdepend: []
-depend: []
+depend: [ProtocolLib]
 commands:
   anpc:

@@ -2,6 +2,7 @@ package com.astrainteractive.astranpcs.api
 
 import com.astrainteractive.astranpcs.api.versioned.NPC_v1_18_R1
 import com.astrainteractive.astranpcs.data.EmpireNPC
+import org.bukkit.Bukkit
 
 class NPCManager {
     companion object {
@@ -11,8 +12,11 @@ class NPCManager {
         fun npcByEntityId(id:Int) = registeredNPCs.filter { it.id==id }.firstOrNull()
     }
     init {
+        empireNPCs.clear()
         empireNPCs.addAll(EmpireNPC.getList())
-        empireNPCs.forEach(this::newNPC)
+        empireNPCs.forEach{
+            newNPC(it)
+        }
     }
 
     private fun newNPC(empireNPC: EmpireNPC): NPC {
@@ -28,8 +32,10 @@ class NPCManager {
         registeredNPCs.remove(npc)
     }
 
-    fun deleteAllNPCs() =
+    fun deleteAllNPCs(){
         HashSet(registeredNPCs).forEach(this::deleteNPC)
+
+    }
 
     fun onDisable(){
         deleteAllNPCs()

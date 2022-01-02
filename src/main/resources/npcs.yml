@@ -17,7 +17,7 @@ npcs:
       signature: k2pOipTn0v/mPHL0fE/QVMuMaEw5Aok0Gp4/TkH95xeM+s0Afd1mcAkzn6u3hxgD+SV4nKsYXr2NSst7HxOUs1tErgsoa0Q9fgyEaliK/nMDCJwZvzeF7lMHzQd08wV0g4BnHnVKRylijy41zu2oPiBBfAgwyuMfObr39A2c0nr0LK3XcE/xDh1x83G2oQnNYKF4DxsiGkWTll67gmihGkHSmsDPwWceIGUDu/zW92kYn4z6CwXA5pE7xeyYYOU2v/vDB68eIOsZhdObaMH3S5Uokuxv07lYavA7vWG1+GSVsGj24+pBQ3rfO+QauJ6V7Tc9Rj99WY7KvmiQivXcQGWmExHfJINWCrIkR5EY6iumJYKoOEF2kC7XdTkp+1LKRpdUUF5w4gMJrbFEvVG7C3NU9AgcThbI5ZzB8sjhk5tU7Cl6VbszH8hzp5LVWXXogVmimErSiQlTL5dL62cGgtJnqpRBbNOC/xX32TR2OqYoVia2/pVBBCBiCZWuUVkimYncBPJZQrW5vgJRodDQR6wWIBbGVKJj5P0RW1IQKKUitWEgS+drUJ9DaBD+5zA3Q/av40FdIwlZyBC9/KhewKqccl4ODzUsn22tFxdE6gB//U1oW6dtwScIEb0A6MktaFs3h3mp9csR2Z2L/tt0O/IuE2KZl+104nDYzgU+OxI=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -840.1731640266959
       y: 64.0
       z: -534.0450370073559
@@ -38,19 +38,20 @@ npcs:
       signature: Fy84Vb/SljdDgkX3Jh0ZyMyE/9gpkkoM5S/2J1472oRAanKrpFGLeB9SGER2x/hOMFXaTqTePbBnuANWF849PKT9Hp6js61M/GUU2gY8YQ5lvsgRlIUianH0zH/4Zf9eI2VTTfjk020Af4DMnpqXTQWmTMyfiSFs9na8iQi0ECmg0u4e8/cu4fydWJwVh56GdgIL5PXdYpv8DZWWoA6VrnuYHunqKlGaxnWNV1EJfZC5LctjJJky2yhCmeSMBZX1C4aX3woEzaZPCuSRrmwEWRngSf1G7aPD7JxrPIZMLuwk87pr4gyaKaf6qBtvk8ZAlem1TmryvLHskUunXURV7OA6KFWkDgLx7dyigzMaiJ4RlA5u0iZnEMx3PfTnGLaJ7XY/UNM0qm7Glxd+K97R8XJw+RMERswgVgurcNgamhFIFfTpFatjJN+alnjb3tIa2b166NrmxDHQXeTlXmA6Lbm2/ZlMneY59b6LftdASzNZ9Qo1GuMzOwv0RRdilrzn/hIhetOMQixL0RWV5sO+yg8w5zLRfNwy4wiZPUrKVUNo0W3hqDqEgE4fJbEIIxNeGupmpl6rhZxVWTMm/RNyP5rFWY25qsPU/vVoBY+wkDu//UbBVP1l5sVC6sKdOBMDFv9F8aD29ArxEInra1awIAulswSrZ7SDIttAQTKjIpQ=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -842.3928276902946
       y: 65.0
       z: -560.0024659339329
       pitch: 19.166891
       yaw: 113.00424
   advanced_blocks:
-    name: '#0398fcПродавец мод. блоков'
+    name: §x§0§3§9§8§f§cПродавец мод. блоков
     commands:
       shop:
         command: ds shop ModdedBlocks
+        asConsole: false
     lines:
-      - '&#2edf43Модифицированные блоки'
+      - §x§2§e§d§f§4§3Модифицированные блоки
     phrases:
       - ':dialogue_border::l_32::l_16::0r_bit_orange:                                                                                                                                                                                                                                                                                                                                                                                                          '
     skin:
@@ -58,12 +59,12 @@ npcs:
       signature: K4KX6SZ80JosJvaw9AvvkIdzqG/lkRYdSgh7gK3YJDeSB1pJ9pLl69+lKQhntFR4j1oiAbt7Eej/5QUfp7OyNeEawqhCa5SQpPUV6HzLRPCpc5HSfNJCixA6SpM+xgbaUKXqOmVBVbPIDCPmIsvPjIeH79Nc8wfkcjjLXEg8vNxQmTxqK1Q8BBj3TDUsZAzsWmlcXxb/+/L02iPARYmql5LyRxOVMUUQK6hIpuBNu3pg8tJCDPoyd0vsKyeVc63JgKBlzetYcqz1cNhvZdfAgm/mGYgYCeVJNBsjl4k3b/RnrTItBIktWP9lEfHosJlt36EPYAoJY6cr4U1nf7gHOE600P7ZCmHA8jkAMInWDE1QohD89a1C+Bb0WndKqUDydU3449JNuVqW2WIldtuIVSMsrkWY6vFd0hAHHpT/JnzkUWd6ZRzD6m9TRHdd7/5Ka/dVHaMIbjSpcjQgqiSqxEwFrNCat6PnfZ4gA++zgbO4ELnTUuS9S3gxeKPpcy03uLnBBRcfIlJDzVHvBELma0qEta5EzNdH4wGM326NR7zfl7SsxZUwq66Ep6RRF63spY68pPSsdNE4cYQVPhuFl2S4fC3nZL1S45W7LbMqe2s066ZTT2q6nIiFt9Cd/8sToyA3sacsgGemOpXaY4dK0PKPEjjQjwKEFmMbvfhhuhU=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
-      x: -844.6462440724421
-      y: 65.0
-      z: -558.271409839814
-      pitch: 19.166891
-      yaw: 113.00424
+      world: world
+      x: 2907.8548153942993
+      y: 116.0
+      z: 350.49407179866876
+      pitch: 24.325756
+      yaw: 70.50693
   resources:
     name: '#0398fcПродавец ресурсов'
     commands:
@@ -78,32 +79,33 @@ npcs:
       signature: MLGt7yO6gGQYSoH2n3jT5c6zInaotT7trZfAI1+xkJFcNE3BdF1rzbs406ZeSTfv8UJd1xBvnBpRFdqQ0nUGhJR8hN7NUJ3yLW/kfSAo413uJ4p96c6vfMwXnScmX0Xdbqq/gx+kAqhFBZzuMKHTrhYOAck8PshSCO18bfhZfTY+vhWVw19PsItu/ska1wsmzY1m21sx2URPtQGxpbkWS+HwUuL1Vvk1gsPMXXeDRv2X1jAckHSRfHEIwKWiAxd5Vl2drx4Z/Vh42smV6Z263a404SJjfwFDDhtBT3P4owx/BQ3x6Mhy0wZ7F8LUjys2UBxtvsnCPgDa3XUgrSN38sslurHagewLPuSTk+HToe2k4eOtWnyPf5sL0FqfZBRQN0Tk0RveDMV8gBSMnXZwfXTPEkuiVzlKpiJi1R2XULQoKA4FNdqolnaFAKPlDTEXm+3OO66aKGEY6k7JgwaPlLdzsqWdEtt73/vfZshjjcEViu4087xo5Qoy8/YcpZkNygGEhHLaHoyGakGKmwf/jDLgwbhIQRGleDIAdGLtPJFn2Xt9v6DCnenDSIH8isxotwtgn8P4DTs2VcmuI/4423/zi40IMyjTrRlKJBE4qB2u7Tal4/U/eE1+Y7muaiLzFchhDzkqazIFMf4sYXEmLmFk527D6PcqV7Bat95UnGY=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -845.6045309110948
       y: 65.0
       z: -556.0206889824449
       pitch: 10.316885
       yaw: 92.6044
   alchemy:
-    name: '#0398fcАлхимик'
+    name: §x§0§3§9§8§f§cАлхимик
     commands:
       shop:
         command: ds shop AlchemuShop
+        asConsole: false
     lines:
-      - '&#2ebfdfАлхимия'
+      - §x§2§e§b§f§d§fАлхимия
     phrases:
-      - '#0398fc[Алхимия->Вы]: &7Это было непросто достать, но вот что есть.'
+      - '§x§0§3§9§8§f§c[Алхимия->Вы]: §7Это было непросто достать, но вот что есть.'
     skin:
       value: ewogICJ0aW1lc3RhbXAiIDogMTYyMTcxNzA1OTU5OCwKICAicHJvZmlsZUlkIiA6ICJkZTU3MWExMDJjYjg0ODgwOGZlN2M5ZjQ0OTZlY2RhZCIsCiAgInByb2ZpbGVOYW1lIiA6ICJNSEZfTWluZXNraW4iLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTJlNzBjMzY3YzNjMmZkOTExOWQ3NmY4Y2ZmN2UwODI5MjZmNmMxOGM1ZGFjODE4NDFjZmVkMjVmYWIyMmM5ZCIKICAgIH0KICB9Cn0=
       signature: Hy4v2bRmVupgLhZuRslsXlSHHNjnb2VzB2xMGMxlc/ZuP7hEsuw05nm/hb66ZztvlyoRIuOnG+uo+fcj0HDwaPi6iCJgKU0LVqrN6mR5jxb6jHoY0t3NJYAKHvrdgzZR20o9AQQS6du3dU8vbjsWhKT6USzgOy8k46oCxcDwm0Wn7mo8YS4PV7AV9SGFSJo8ufGIDj9XnE0vz/UKPxvvc81fXdWiOevVoNv9gEYloAY1G/5fE43Q6Vf5D1P+Fnu4L7LV/At09LDGzbmHCIN3RP3xysZ25vDuGovekIL+vDL4UkTCsXMPXQkVLGCchBpQUhAgYEMKElW1UneIMpviCx7XFQ+GQQZoBdZs4lgPUcLMp0PRmCxLBDlI4nn5w7bEVFy0s3tX6+ZJYmNiOoCV7xa7NccUNh2wB1Vj7/L+JwPJQkMb9KuD5u2V5lm+oJRoc4kDwkFG3v68RdI4qmbOWb7N7XnxVWcH8VtWs0X4RaJiKD+GEA3e0NRJO7ASbID/md1amwqKWKzElD/X9R9OKxSJ0tXTeKrCImdo6EHZ+cEsZaKVJTmyI2EsEoraDJ5+quQpt6wtDUbQmMtPu9jdteusp9XtFmd4EjeuqGkBU66+uALf+HZR48g9RHeIDPjpl0UURthlNjLlAqv4zYQkr/fFbXi6ATV7RtWax3FDhxk=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
-      x: -842.5620593116139
-      y: 64.0
-      z: -533.9166516822744
-      pitch: 17.366884
-      yaw: -139.74539
+      world: world
+      x: 2910.196135009065
+      y: 116.0
+      z: 351.6088188681256
+      pitch: 24.325756
+      yaw: 70.50693
   coins:
     name: '#0398fcСкупщик монет'
     commands:
@@ -118,7 +120,7 @@ npcs:
       signature: SCvuTvjEKulduU85loougMPhXwchzuOpOMCY3RcZk4K/8gNCLbH5HnOB9iMcipGEL9EsrAvBbh7tg1BRD1L8ZT7/3k6eyRwUOD61845GxNzaJZ/t64VGuuG8F6Mvp0sUBVL1JNY5x30FoJmZA00xJ0SeGVurkzCAXxLZRERuKrYSGiJjsThGKJFKq9aZHfNDfXAEXfTfg/CGV6Z9hfpNbdKyHj9HJm1iatxr/K7gydf3C7B44DbaJXl+zk077aTZd3OFfF6ymQ/2ttSx8thjEfgmKENWqahfv9fseB/+fX1pZJJvWsKOnh7c8fH5n3ueL4IIj7atRwx/pSdA2bo44p5uCsK6eJMnOpLeEp+xVA9JC+75A1i2HpB5vfqFBZLd4+pdjz/c3vfQBk5BHu6M4+4xnRAn+uZYHDuiIhLBnAy/R7oDlbbcLLKeJix+XCirPQepTVvyysLffUJei5lytTbD7Y3CCPVShJJeNtMcz/PiPdq3OJ5yKyvWKNBjhx1Of058jGRX2wzXgmg7bZgKh60p8z2lojEleB+iuakAlCPbQt9TebxTiVof02a2aB1+Gher+F5G6qjBgmXVxgFMU5FXZHimWgHkEOFUE7xfL6OHBdeWeXJoyHzAjXnmLk2bhigpJwUewLhjQJHbtrcNHmn492Ww2Plws7iM5FXn16Y=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -833.3195401462974
       y: 62.5
       z: -543.5887945231614
@@ -138,7 +140,7 @@ npcs:
       signature: MwXjCyOzVmyPMB9xtFsxMIkVxLI2vpMECpJSl0AbggxoIteXED5J2LSE/C11WRsS81RmKeafb+jD2Equr4Wrh/8sxBejb5JhJ74Tp81QKgZNDlCfx0BvrIaWXPLl0YNVgNGm1WTA4bmWlu8jeFZpJW8qW3pPoEU0YOOqvJr8CsyK8OGoZbqTgwkhl05mViIkZ1nJaoI6pJUw4HJgt7EEfSJTCJgAtdtNRx6Wr2hsktQVpod12HF4gkUy4hXz+TaDSSQw4CAN8VFeS8HLf4joTBxF0YePLA9MeQDsRYEcdd+Uf739R0Gd+E6rS4HfuL1dxK4qIw9k2PHnW52P7fUAWJx3n+iSuGny/Qze22dD92FSYIVuqiDsrHUvjaYB7QwT+lUx4SvdjBpYRK5odhw3nWuvP6e6Tg1kJ1NUdUpYOhoAp+OVljpf9E9Dxxi/YakqT+XMOUJ4mDfUXe2xptMqF5rA8pfSj+8GdbCFooAOlGmm1zvsay2Iq0W/gtBKDzYHWHBmF4hbbgOwyS+98olmk3zaqRMf05kAWjVst4JlBbpHCuADeIiKH4GRC1NaUNMJrgoQdjvBRdFOvStTdxq79lEInzPlZKzz8zPCQiZFg8XIkU7Wo5CFluIIedp64Os7Zd1ptiHH1JSUciVpG8VKd6IWvI4tc0MY9uuldVAGx0o=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -861.2153728712783
       y: 65.125
       z: -583.9199508603145
@@ -158,7 +160,7 @@ npcs:
       signature: npJVVZitjOTDVu2pM/CXa0XkMws2BBSA/D2v/91z+96w1wm5NxLYs0y3vjcG4mAvU/XJpy+97LkoAP3epgVDmqK0D1qsw2ot3HWKLXxPLZJgM3MfJOqEG3rIRz48p/ZHAyYPZV74ZPXZ4h3/Ww47t8L52dczC+qZ0M3IrfJx9uSiV5QIA48XYUGM7ffoxvl9MWE2zKa0t0+dJ5CzLd1r/n4ZOhZo8Vw3Ikij5JbTXlar017orAwiiNSYHo/kH+e790E0/lHY1j6wEPpDLaWFiBjWMBl+geCF7ScCjnpsCy9GSDmfwrSrjUMu2LtDBeGQ7quArpzWSvJ0ZKrjEZWVpYqmjfb/g5yqetYhmQYLFnycMvEuX1RAMGdTCxysN+/PmEGwZfir3o5kefIKbAQ/k7QjZvgn8ReSskihI/xtKQ0OYHOvu6VdvJrmma2EZD9eq+4yXATXhQFlGU0hMHmB7rgIQepQILaLwt6nw9J3gVSCl/3Bbi+OlK6qcHTCJIZhkKJUjao6SNU1jfhruAD94xC90lRL0URFVgK2YWZz3zY+WVj37FLIw5MWMs2KvPBtIz3abnD4pYN7ENNyMStpzit60HE9zjN+mHEEBLU78c1YqEyNnt/1egVgXRi2Fz4BFDDDEoXGfmBxEfT9naCPU6LdAQjc4ifZM7APWguptXo=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -851.6156600697008
       y: 65.125
       z: -581.1245311646755
@@ -178,7 +180,7 @@ npcs:
       signature: S4DEtod82P+OM+d0NZAlJZG69frWDeT81t3ZQzjsTrfyIfe9D55vyng5+iiJnYlUDd8D/DpZMk3PUTrO6CPGY5HOeiRcxiV9Ey4Fn+O9C92rmdu5sod7TS8gCYeA21SqLKkNrSncgoFXW6QW52MV/tWKI2+k3ZL8uuqQTkNLrKroiBMIkz43E8sSrUIuKGkG1Ta1d6PRb8QDiT5D2k7q8MdSS/bR0rJeAjySPGSlizx10607a+ths0oARAZoJGfkM0gFXgokWqgy1Xsom74iXXtUBHPCSDNav75yJk18V+b71BlOlnVNRecWje1NrC2W6SrS+MerHpeATE5SCjpM8EBzbYkxp/A/Rlz9kDeQZAJA1sZPv6/zk1NYwLcZo7qTiZrtQ3t7HForSbewWYOH2++Onkarl7kHfcbrQ8MOSqteWLQzM/qfZlEf5Q6rTiLVxrHZOKCq0Uo8mEAmgq+Fl6xHgGqKslnh5NWiVb1ZAcYaBEVqZyBqhPEY/Lg01WYRPoPFm8HnYHfhJc08NoFxcpS7RbTYmpqOVnmTOKvQJQcDxL5AS3z7JiDwxjZtjv4/EI+9p4x+zJU8/+DibVrKp+NzNi5Eud3ifjzEUsUpl4w935aYRV6nc8hlOYZxoYRZs623OmKWBlKOuxbY5qgd3tmerXhYqMjSvNNfzuy4Emg=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -864.1850761674431
       y: 65.0
       z: -594.5275331570106
@@ -198,7 +200,7 @@ npcs:
       signature: yUFOSG9VJqT6UbJFignezCtvZY79A8K24OK2qEysZXR5lzTFMKakggjYlOPmFKLmQ9x0zG5QdKHMUxe5C8rPy3z5gN8m0YkIYWwlY5Tv5V1vuKit+uqy3Tibdx5pM1GK9LHo22z9ePWDEfQn0v/O4G8EIF08FqruY020AsotQxKqU2r5sN51oOVPkUuzvz4UfzY6vLV0aqVCr6B5fOPC13Kyj80TxkivzVnHEABB9XikkkXZHdcEU+ZdAXDNNPmN5V5ZKPGRW2o+dZkhTzN4uHiuxBk2l7pBC6ApaiweaIad6Lin87UrgcGQxw8PkhGBaUCQ890fNn7lreRRnmRI5iccdbmox210+N9uI9Wn1S0nrv+rIuOBTrS3dYp2FnTUB3xXufhzbAJYL9h1s5Jj5xRgG8DmFLYqjgQg4hdbeKeq48az/QkCgzHt/aScdfsOmh0c/Wg0vhrI62O5LahWcnAQoAxalQudR/w8h59owK/MvvvyLIc/ambdbk917x2SQix/xquy0XY1ViAqkyi+mhaqKquvVgir/1Wy21fJKbqVPFZH+zLwbbmVdQGY+I3ALIBlCrv3J1ZJ9J2WhdBwsDri/is05WmL0avJCii+fI8E6pTIAqhs9JvuvDV/HnypR8wBp70LBZTcvlI/sJPxoYjbS47cs7IWpOyt5/iB30o=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -867.0875925717293
       y: 65.25
       z: -593.1297737644819
@@ -218,7 +220,7 @@ npcs:
       signature: aLlKJ+AbUj7dswJFDyum6twGxuuw9AIhmdXZt2zfpBJzxof+ibisEBp7T6o0LTl4K9fRwQ2Hb5eRfVYzucNxbEPYuvqBkCPAeFv7BdENlYe1wdqrpLk8dyaTBLJR/Q/WtRwaE7shQwAG1ZyHWh/HauFpN4162FAVOrHDaCpX7kgvo4R84pLEWwUWdfDjdCI6QLXs6d0OC2IC0XTGEjgNST0tScXtyjUZOzj1vhGGjJ/PCI5YIqlh4PnH2jJ/8SQlVJjizJlnS25eHElh841S1Sc+niu1TMsekTeQHrkHH1w0hzECufdCnGOgV25gFuNjmf8qvREENg2ouJIuoGXUy/Ni4r35p3cYNUvPiKgwxjkGeFTwsewc2nj3khrnX5xqhWXm5c4oSHVUYyDN2Ja83rxLUZwh2T1xD0klXwukcYLtVr15xz7vTvSNRY7ikO44mKpkktPlRN8TqGmhWUBTHNdz4mYXxJH+ygbgrA8nG4Qju8IFeJYhsUsvQExLkTWg12vjDxtqeDhHQvMP/0iqQb80pVXdS5gebfN0VJEaktzeXcrDEbfPTrSX/dOgbMx0WjmP8yFyYkwoVvQ1ZkEu3i2BtPZGJeh3uyzqDKb8q3Gvocn+yHHwLYvQcL1M3EiGOV4ZEeh1bsI+j7/T+e6U6hFAlhQeR109FgkOwRi16Xo=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -862.0884705442162
       y: 65.125
       z: -594.3473232454968
@@ -238,7 +240,7 @@ npcs:
       signature: lLt+fABlKqBbZotEXjBFTrLERULqfjLTGyYXSF7WA6m+lLQuf0hLZVtw9r979/V9iKC91FazC8RpzVncY6o00uWcxRZxSjLDLgJTvTmkQHIk7d5xFA1WF3DLXDcG88ej7VNdJbuJF1I4aqJcVhH2ysTGj90aebd4mIHMyf4Yvm47IhZtLYucEMlz47JKphplvfi4gO2tWQylk9UATSsAX5hX7jpiOOxO7trGt8s8KleD3xEKEnVx0W2D6eFhQTWPyEjFDXq4+2hC6AiHNJBtDcJStgYIwIMHnEnx+JxI8pLLw4zQIXk9WDL0sUqfX1N2PmZglrDUL6dnCu4N/CVnBd7OUNnf0yErAvW1iq5xKENh2rjADObJMslQHgZrT7DYwLUdNkm+z3tbjSfHTx132IBoLWF8JPRZlJiTjah5fWDiHdMfwjXDFsNAUUueCefePHHCaVhlZuEVrv5jt38zuUn+JWRpelTHUd/7qlUrXwCHREnc1JVnTsghPGRDLKaYmr2i7cGi+iSraacH+DLSnPCnhjYLt5hi+4Og87ySU2BSPQ5qpGVIE++mIB2lAdojSu7nhGup+pVtZvonnZvYqYxPA5tMe2jIqoWkUa5wTtbNqS/658EcCiZg/Bb7UM3UATGgDT3sY/fsWGwaxvBjeokn/V7RzZ/LObPRTFIR794=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -861.4747352424974
       y: 65.125
       z: -591.5998860241618
@@ -258,7 +260,7 @@ npcs:
       signature: OY3RbA1eow+YqJAsSXH+LFBbCdM53STW/v8PotJBK9jMBjpZXZ1ii3as02tGy0bNU9bAkbNltlq5uJ2PN60nJRnlmq2ADVLQSgcjd6x7HmRlUblI/Nh5BaSPDrzt+Vq7bWFJ0oqL8/bV3Na30r8dBcuci1cbB0EDvKvAaWx+Cs4NtqWqVZk3WIPWU2Oye4HoxCT2EcVkfSBJ2G9iZ5nhQIde2YYJXFoAAi7dbt0RrEQvsKqfK/DK7WBa/NCSiS9ftZh3oZMLB+odd/mhQZhVaLfxChkCEiX2csgknfmhXt8FuFTzIEq+pEbNeC8S//CaptaASKJHPdhGjpSlaG4xt0/YTrvVR+TeVvpBpJbOUCxuvJBy5veak4uD6DQgfQo3P3VPsYxQ/n2d5kXM1HXCzdRrXF9mlb2ApAybLHkcEw1GAccUeiQOxsdTonaP+ur05WI5wyXpzCjCsBaCes6/CxhzSCkdBS1mRcbpPo3B7mfX8wbaW2A9BZt1xa8ivY1JKDGjIa9AYfQpDud3OTjZlkn4KxZ2xl/SETc0RJW1Eug6xNqAbeHa43kIhUnMu6eHCu60lIiTnAeJIb/k03HUREWXaVpS5IlNysUj6oqDA2OPAwOfMh111DEozL/l8NZPltVb6dxwo1fbZTZGBxLlPfbFzH642Qpcg6u+rcsRNdY=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -865.6260762495009
       y: 63.875
       z: -540.1288795820672
@@ -278,7 +280,7 @@ npcs:
       signature: G7x49IDVCuMaGhcAJXFP0VO0CsqrmXTC75fmKYsjXIDoTU3GAa86MU/a77UFgi7sGVJBvuhgzgOPe6KCk1nsHgizvMmE9aZ/UoA9n8ilqws6lmBGgdS4iIzbIPg9K40CJilpaeKDHvZK8AA00z0c7e0yJPSl7xlA9Es3orr4HyO5v/PoIxDpTZZgKbFr8WQ1t3Gal+ba2L+xSHYF/9LND9gEGEJqrbkoWL3GkjYy+4sj8EvXyS3FtA+ANspN8ywUfttPCfP+C+okITLqWkeUwpwSyX2YUaJVpHGjb9B8UHwW3543UcvN+7OIGUCa/bT9xE7orBVF89QLi3bcIVxuPOenmDhdpbENLJfzcYiOkfyJB0mVj4jWQ6fO+2bLFdeLcxvvPoettyZTlJlO9wCHgx8rBUXBc7dKdsbfLRf5H6pEhw+lQB40HrJzrnY7y+7rsK89fODblZaNszoTDtOLBzqOr86PeWrLCxShJ2M8WdPceVHiatRRfC485KyIuIUPuCkT2L3X2cPUd6DAWenBKKsz3AaToSPlwGifwf5ej8CdJsNiBSnSdq6anr42TKP7+3iG3+cxtnXviZmYJz8fCArPX+YXrt22H0gezI0zCLiJx4wgg52X1h6O/2eiQKxXeowHo9dhauAYJPBDnM/w8TjA4deDZcLZ2ectAIG7abE=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -863.159221248014
       y: 63.875
       z: -541.3173987292247
@@ -298,7 +300,7 @@ npcs:
       signature: v5Ybcd43gvJqoWum3s8L4XsPqhVaiplNYZaMSxPMvtzx2D7nnSOCZuh0MVim1wjG3PRgOsD6R98KBsaJYcsNeRk9AmY89ZgJsE8On0UM9pxPNYGFVkI3j6Y2G1cHhyb1bhs45XUJhl7NY43tIcV9lrAUn38Pb/6l++KOI6B2vpvnbWKgT4eFzlvpg016UopHsT/3aL0JtVhXvrU4afuLl4R3/vaDRt1HDKY5+c3xYLm+saKGW8eN6IgFQi1TyAMtMKYcVsBKBXLwyWwY42H0tEtf6vzWlxJtUSJJd9J56+Gavp1EUFejU86mJ4CcTMXwgbrGbf9npvhDfjpkKovVzuK6bA42oOS/a3qwhydtfBzCsIJ8OoB5GCEx8kDcqaUQThSAGPMvQfWQFc14xTj4qXK2xV2Sc2DU985hI0PJ8zP3dZYO384QE4DekJ50pQ2zMzixXBtypMGBSWqT+E57Gw/ZlTdHCSEcrtgBHRq5EEjAOY/7Ahen+m9wdvoP1U7L5X62Tt/dPyr8DURLWePig89MGiursm2lLyXPKuFYvWlMKEoUzslk6HaCec+9bwq/HffTLPQ3KJFvnKVO7P9ZBbej6CzD2pOjjqO4PTVgT6ws9kNO/QEkutjzhipQufzAwtDvNq+gC0w/owzuKh+QA2g7/pBEAxtdpl8akqJUasY=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -860.7067467908333
       y: 64.0
       z: -542.4742609120296
@@ -318,7 +320,7 @@ npcs:
       signature: u2yBOFbJ5PsCcXLBj9JVYTzUB2dATJymdzdjZHGZOKnqboVyXgaIJp+bK8LFvV5RWDqx8XFhlxEzNkFiqbsORAXECluIILj2JmWo8Tf+cUdY7jRlHt1+Iy0QFKVKInax+hGYujwAptf43++voxoarwqFg1g7Tl43u3sMPYW0l8kOLBliYlyggakjxRGCzY9yOLswFWatJlKFkcbGmBZahHIHrBc/VBGT0O+MpR45eEBjcHGmwVixnY4uEYfvpW/6UvxQv0o746Mb4DPDwB09jzkFIpuPByVvJ6kMpNLEpDVjabQMJHlP3pnKfe94PllCGJB6WOx6f27I2gfA944yfrt8SeDB4qh2Bep6rf/BptKx19GlnXI+60/3RYis6oqgWmkkEYUliPxvkgofDhVZFTB0r0WoIhBgyW/xWMwGufgP8/t4GXmfhWDFBD5m/0a+nixxV61Y6ptBoH5zlr5SXoYMgc5qpJS7WzgFm0rAFiQRgMf3+NnLlK7pvkK7jhm5Vffkdny/JYRniutA0HZlWZvRv4mliWCVrRKmAmWcsY2Vo/qF5SotmWqu7XDmXTJSvdgDgZFPIiUmRoM3dfcXSOr5EjYUqUh45l4TgPNYhvXphsVsdD625juXTZZDu0Df7kWDJAgwecn3cVyQ0ZjI9hg+y6XpKHu+2DFjUluTLu0=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -870.381949793283
       y: 64.0
       z: -545.4383883753598
@@ -338,7 +340,7 @@ npcs:
       signature: A16C1rI3LOIH0CDI3UgBnMU47bSVAwV6BwhOh7/g33jmzKKGNVaN4/vpduPkgqd5OsjWS77STUmCDUzeN16aj7os2dsYct5d/9FewfGQyH+LQfpXMBvy/dH8Jo0DVkoZ3FyMB7FC15Dp9fKco8CMoiQuipMuwC5RIr6ji4MuB/0lewcgGNgQDnJYITAJS0mIZg7wAEFEPoMcdUXflltwPuqpJUwwWoef95jngMWv7T18xycrN6GCLHMy/iqSEKIVVTQDC55H3C5R2Duai5ovaGnQ+8XaYq9Xh0sIVvRgcO2HRAYdwGq7PVSn9Twwq+H3mscoD6oc51bTSNL8c6UjqbnPK5dgndFEZukA21V3CA/dkhTTwo19fapIDGGvQ8xL0nbMFLxi8Nh3nSYZinpPoQDOTQ5nsjSMfv5tTLtU+/xrj9Eu4lfg/kVgvNVejztuwhbZlXV5ApDDSk0gnNLeQc/xJOsQypy2vCkb3fmdv5x9XcMQbD81ox17qTcR/yXf2rHTX/plDszwCq2q/x/jLpNNjl+M2Vec7pW0MLQHvM1/g77bv0hWyVkQvJHSliAXGeDjDBpfxhEoiKZZGcHNVlAB23Z1ZRdhfC0FTzYB56nOLhTjALwFbw8F0rvIkNQp1x8Hqe60idR7YKn9D5JSL0p8BfDlqH/wa7sDKi0Dojo=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -863.0538877479657
       y: 65.0
       z: -581.26882643687
@@ -360,36 +362,37 @@ npcs:
       signature: YgFTOeEzrL1NCBmrZH5BrVeoyE5YMETUqcFKWq5HOfeEELUS/ffxfWwB/dFinjWhBfZb1Jld686qdkjYtM0wGIUpHwFUzUsBTtjbKtBCUNyCfsoosdH4wEo1mh8qx7iKkgKhFAaenCxfO95HwkUCUiVdr/vcPteZnaqjvKJae3E0M+FjI6rCY8BxqNvxNXlrOkuss7NLw4J9pKW5K7DQYOqo90ml//BOO5lqD2+qAMDw/j2w4/XEk1xG0aFFyM+mH5r1PhcTO3RzDI11RsUmJSTfFkfDx1OeOjrvKYANcex//mx87Z2KiuTJ5/xxqja+WVB8RJ6btXpvcDPo5p0cJSuTOwQjpIWBAzXfHVPql0Mm6hxIasujJaeW+Hy/joPrwz7/ZczUqB6L6jMzGPlHi5S9Yvx53SL6h5dMMp7bsvI1SPGVehQ7BjpAXEuhN1PJg2KTnOxRkwni4b+PeSp63d+Zhm2fKhtt7LfGzLYqO0+c6YDvCQMAabav88Dg5u5Xhomz5VDD799AmJznh5XqVfXuF3fMkvt809Q4+M+R8SaRScozZJ1ClAR6HWKONwhI6/yYytGnAH8iVQzuriu1kIz30Lxhu+JpTMdTvGQ1Ow7fmxMoq0KaAEksfS0ptU7IuL+Ge5svyScUUNyUf4+eM1ZSQeT9oV6cskaReU4p8f0=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -868.9339037314492
       y: 65.0
       z: -575.0669947207203
       pitch: 4.7668867
       yaw: 73.70376
   helper:
-    name: '#0398fcПомощник'
+    name: §x§0§3§9§8§f§cПомощник
     lines:
-      - '&#2ec7dfРуководство по серверу'
-      - '&#dfbc2eРасскажу что и как'
-      - '&#dcdf2eПомощник'
+      - §x§2§e§c§7§d§fРуководство по серверу
+      - §x§d§f§b§c§2§eРасскажу что и как
+      - §x§d§c§d§f§2§eПомощник
     phrases:
-      - '#0398fc[Помощник->Вы]: &7Все вопросы можно задать в дискорд EmpireProjekt.ru/discord'
-      - '#0398fc[Помощник->Вы]: &7На сервере есть новые предметы - введите /emgui -
-      для них нужен ресурс-пак. Скачайте его введя /empack или с сайта EmpireProjekt.ru'
-      - '#0398fc[Помощник->Вы]: &7Открыть меню через /menu'
-      - '#0398fc[Помощник->Вы]: &7Чтобы повысить свой ранг введите /ranks'
-      - '#0398fc[Помощник->Вы]: &7На местах смерти остаются души с вещами. Введите /souls'
+      - '§x§0§3§9§8§f§c[Помощник->Вы]: §7Все вопросы можно задать в дискорд EmpireProjekt.ru/discord'
+      - '§x§0§3§9§8§f§c[Помощник->Вы]: §7На сервере есть новые предметы - введите /emgui
+      - для них нужен ресурс-пак. Скачайте его введя /empack или с сайта EmpireProjekt.ru'
+      - '§x§0§3§9§8§f§c[Помощник->Вы]: §7Открыть меню через /menu'
+      - '§x§0§3§9§8§f§c[Помощник->Вы]: §7Чтобы повысить свой ранг введите /ranks'
+      - '§x§0§3§9§8§f§c[Помощник->Вы]: §7На местах смерти остаются души с вещами. Введите
+      /souls'
     skin:
       value: ewogICJ0aW1lc3RhbXAiIDogMTYyMjc1MjA3MzM0MiwKICAicHJvZmlsZUlkIiA6ICI3MzgyZGRmYmU0ODU0NTVjODI1ZjkwMGY4OGZkMzJmOCIsCiAgInByb2ZpbGVOYW1lIiA6ICJCdUlJZXQiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMThlY2JjOTBhNTg0NGVmNjhmNDgxNDU0YWJkY2Y4YTNjYWIwYzZiNGE0YzRhZDllNjNhYmQ0NDliZTBkZGYwZiIKICAgIH0KICB9Cn0=
       signature: lLUmlwJGlKrB+FKbgfhQ5EgcanfcGo7n/2OMEiyWlp1xgQQYFhkloH+sgTYBWUCSdoapWXBU7x5Pu/a0yfgzPsbmZzIXDD9Hla1cYYU4a+YV7N98lNZ43Db96locALFTgtS5l30bLwTWE/vBVgtOb+7ajAaXDp6BS8kwDtQi8IsGSdYg9TPD0ha/WMv145NLih9yDXJBt9T+DOBFV00czxB8sOVDb0iZfRrSIjVxC7qgDV57PABt+td52mRu4pgmkcpdCC8645w0dMOkvbeC9e9o9lFeHfoBpKEJrkTofZSqhioXOqO//iHn+m20/kTJaaZ4newaAOINtyqdUrd+UpOmke6y1TCVFW9g8avWdETUAih7XYeW5hXX4I6vzJHb9bo29Ua8M3qGpqIM5/qTbDqsOwrJHfaAvLkrf8+GYlclwLAULnde/iAFqN80iso9zRUg8xANtM0BP2wMq6HJ1PrtSj5qFoShF/IkylRVSRzfa9HnYKCXZXAobsev9QV0L3kIngBeIK2hfqGkGq5J2007TRJBqVbd3RFM7rjgc63XKo1mSPh7lldxP4IMXMvJuwM1GMt9aZUlTDq36O54mE4892t42TWOcGa89D4Kv8OdHMp73I+7AUkLm6gl9771TowWrlL7FQBKhF/y6BwlCJWiTHVf1w7Y/hOENDqREg8=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
-      x: -851.2633643930614
-      y: 65.375
-      z: -585.5257773798425
-      pitch: 32.06688
-      yaw: -2.346298
+      world: world
+      x: 2907.2913468907313
+      y: 115.0
+      z: 354.331059003574
+      pitch: -12.574248
+      yaw: -131.69304
   travel_home:
     name: '#0398fcПеревозчик'
     commands:
@@ -405,7 +408,7 @@ npcs:
       signature: oBUyetIl96J03lt8itw+sZ4FoIVn9IP/aFnXTAtOjSmufB0a1NfV5o4druiHvvJmp/QGFahsXUA2B3CkvKd2mjN9Voa37l1ejCnwzi41aDwEC2HFESKYTAoawPFX+Sg0+7kFDZcS3BjuSDcmIfnwtoE0+uP1ozuOcyTE9iDt16As7ebjkdNn6RD+5Hi2+BPCt+qumPtZ5PPfjHIEtAQomWIs+mFsDhpQXmxNsYgwPICmAsZB+TUUxILA34XXYodo6HR4GSHlUg1bCgnrsJswZn12Qs03ttJPahRDClqGFZ/Jjg/Z0/l4aOja+AF4U+dsRfs4+HB+oTtcOzEvmat3mPHrDuZIz2pppa9eZD/TqWGOP/L5slqyWiCgqKiXceRwMl78MGU7Ojhewtpn5/7gUl25+z25quXSU1XnSeiZf/sva8jEqJdTVM8D+S+YCuAR9DWdeubOQPptb8Mjjuq1P4Egtu/nkhus/Z8W6aGFdygrjpujf5r6p1rNkzgo8OLdDiHShUtcqa8OmbCrs0Mrnqo3ybhIAjRu8fU0Cg7qJ8uV2NjWIrvPorkMVE0EkLwrzzODl+qSjoxkbfAoh+urRXpPtt0Vm9LftVnueNrHZGHr/V4vwjDJ2gkeczvvVLI4d/VsQCA8cWIqOiD8PS4zGXORBKz0i9Mi5q1EeaiocVM=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -860.8244136196016
       y: 65.0
       z: -575.7249313556562
@@ -427,7 +430,7 @@ npcs:
       signature: Fa5WwcSQdgofGyElxff8ldNyJV7GFNtfbHoVmGPeSePMEXcAkzLQ2PF9hkOTMz2yjY8KFo/xba5btd+lzlwvrjYioeQjx4xzzHY1GoY/j4hH27P3GnIQforxoC8yRHtbcAQp0tu9l/dCJV4b4aYFwAeHCfnf7CE8PnFn4Xh23yiuXP5ddLaLbdaTFKZ0kQ4ftRV+dGIFOcJn2+EevPBfvMZaHagEjDmFRD3iDv53HhJpA5SOSMMwNCvg+td6DtgLKvOsfXruVwfeYYwgY4t1WMIGZtUUh1FrBu7HCJsjf1n+0ETuJkAcUQswYY4dx0hjRzFZ2gcXbxzVeDZhB8R+j/WI6ap9fzSUQxihr67ANBeNBnJ523KlJRhgp7O2MSsnzlvKOPkhSM4uV6+nG7CRLERtm6CmJGl5Q2g8zaVjaWdtfZJ8Gi3BxSGT0AgMsP+0w9eSY5gm/pl3PvL61PGwyc+u2uFMCvgc7UfMdO6GGBXDxYIU9OmROSFX6r+uX031pf+H1WIySobIskYC2EXFLtoSHVp0vauRxncHxYZzZQrW4i8J0y41JqCSUJTStaOsDh5pq57bVhm8kgOLTy05XHzjHL/JZHbOjh93Dsrygv2BS7m1KKnXNP+8Hsu51qMIU3KoY1aNORUgDVGxqiuvqdAwncqqSB4uUJyo/Rk2zrM=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -860.9556469450381
       y: 65.0
       z: -578.1179828085085
@@ -448,7 +451,7 @@ npcs:
       signature: m+j+vqkEB9B41XwP5UCTFtVriOpnEa+HvKi3emA94l3C+N/J3lM7+HTmcjEHaf/D3b48ymzWuLovQmWH8XXZYCCoZ4znrtNQxSfCtbb4FDLdH2CayHWm5/ZylM1E93AQcxGiZ/aVRk/ADzAf53PlGMOXkIrbzcqsfPPRv9NkdLLJ9n3lXXOPuymUkW9DPkI9UUbKL17v0H/9dcNQvVQg3n2ZomMxpcPsanN+Arit6eiWBlPiVaMPI/9tfTFZ4rVra7HEtoG+b0MmAPNUR3m8Rs8JuIjAYs3jChL2czb3IAToUv6h58I2iJFi+D1yAAM4HlELAv6GCc5N5rzEdQR+Ak75eL/aZk5rclop2tGmMhKNs0G6PbKA+2Zsq0fNvxMDi/DUvWx55bRrxntKdmnhx52YWakNylIVCNEEyNPG+Gvnmg0J/Du0PkPyEa0njz9apiLOnWcE3O5QuEaIhw5GsLC4iOYHb9xQK7LvWAMZ0nLVr0RGoWq1gwJff7IJyP6nph35KkWV+mJgTdWjBa9FRwMEQlKC2TIgWRgbiBR8qn2EzC3D8+lZFGmM2yGO6ojbGbbmockmv7vK7FInJ4K3kw1Ekh+1A/9EOt3PlFWDt1o9PS1vNkWjZvLZK/mFWUr3rlufvj8+W7BJedN+lg+3GXQjKMYTqG6HqWDNlELkVeI=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -861.769976301781
       y: 65.0
       z: -572.9909372573657
@@ -470,7 +473,7 @@ npcs:
       signature: xx6cjUXY7w8VCOfUbPGegfSXcqJtckuGwKI+G+zmrAu4IVA4Kj7nOQgQ1+ODHMu6bTBBEORMXdqzhQoB8r6C5kmf7qzE3hvFyWuOV7yZMBC1SmehDfQw0pBcy4ubVO3tGX3hd8/pCCTQ2z2tYhqMQEXt+acpHFoq2MCCpc1NC1M3lVlcwQl1AK6cDnBrw3wd0646fNUvXVdLEMWWsU4Dt6iVUIwNxjsBtN0EYiOu7gj3VFVcc9Re7e5FSwNvXXkFCA+CnA0kJEmBHfv6c+lOIxsdB+VpQcNaaJ6vonRxrbWrJZzsoNrsizO/UA4nyO+A3cOUTvzWQPWjnYRI379PWWbjn4aelMUB6/f2up5VMoW9pSlGvPx5D1F6cX3UO7M3RroIpUHZatloS7DLHdItPsLuEufC/r5/O+RPDjkXfBu+As5p229GbCS4O7Emzv/aj47kjJwQkDAjH/7cMy3ETC33WxkKXRG6TEeP11rrsG7DkXPtcOQRLQ0xIUD35h6So/egzDlrU9Be/l4m44fB9lqxpQN+6dNrkJ4bhXTMWyN1TnRZyyn4GTJOGVtGPHjpmWSMLrF/mQAuJh6NlNH1k45n+qdyhaIFUQQkdO5p3nBr+6KwmwEQpXrz+OoLojSZ9YjDSm0ubcKvh6K42Q7k9E5uuSmv1Sw0/otfOVWU+z4=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -846.3744871664636
       y: 65.0
       z: -535.6999999880791
@@ -492,7 +495,7 @@ npcs:
       signature: gRSm9qbs/FFgUBBv3SuR99GPzUMCWs4hndSDdqgynL/bpV77nW9RvWLzLaX6UTpbwPDj9FC6SWci9HI7dTCjyE22zkxmpV+rS1aQehPSh1Vr2Py8K3Y0qRC5Dr5NOJxyG2yfItgbtLtkGVcM1ISlJgFJWpoV/YoOX5N11cdkF0HFowbkbxAQ+feDW5b1IkaFuY8hNvBvU97WaL7/TRve1bKvnKvv+jPrnxIynOXYE+fJIgaApC31Zn7Abpgv6Ez3PiSX21demQecsksE13QvBwNlkfe3lp+aOVyNbwDO0zbOwBwlaMgfZT0MSywxRIgVrBgqTFPTxl+FFQdiiBI31Vd6A8usBrvrW4KR83imMnLTNp3PqixzxNQTFCSxPfXWkIU5lZO4hmlwet1L4Z0YDPQ1XWJPoo3K+EiMqnhL/+bwPrqYd+xXntJoT0hQnrrNdYMymbg640NoOtY5AK3WlCqps+LIVE3Q7r8Q5XZOQVT1daJCtl+mvgNP4vtGdZyAYLOUrUih3qolthbGxEmQS+qmqsbWqZ0fu+XsM23/8oOgrgcKl6jJtdbJml3byAkXM68TWL5zyqc/MIV0N0mHRTk3uhqsfvc3wn3PkeG3nFdKTdrGvckVIoEKpBIz6T3ghhP1zjp6xHP8rGxB+fE+SbfN/DJaDdLWgtJsk5niyOU=
     location:
       ==: org.bukkit.Location
-      world: Longuaria
+      world: world
       x: -849.2411475250752
       y: 65.0
       z: -535.5985263964459

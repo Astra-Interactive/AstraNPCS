@@ -71,29 +71,45 @@ class NPC_v1_18_R1(override val empireNPC: EmpireNPC) : NPC {
     init {
         spawn()
     }
-    fun setTasks(){
+
+    private val onlinePlayers: MutableCollection<out Player>
+        get() = Bukkit.getOnlinePlayers()
+
+    fun setTasks() {
         rotationTask = Bukkit.getScheduler().runTaskTimer(AstraLibs.instance, Runnable {
-            catchingNoStackTrace {
-                Bukkit.getOnlinePlayers().filter { it.location.distance(location) < Config.distanceTrack }
-                    .forEach(this::headRotationPacket)
-            }
-
-        }, 0, 2)
-
-        removeTabTask = Bukkit.getScheduler().runTaskTimer(AstraLibs.instance, Runnable {
-            catchingNoStackTrace {
-                Bukkit.getOnlinePlayers().forEach {
-                    if (it.location.distance(location) < Config.distanceHide) {
-                        showTo(it)
-                        showNPCPacket(it)
-                        hideFromTabPacketTimed(it)
-                    } else if (viewers.containsKey(it.uniqueId)) {
-                        hideFrom(it)
+            catching {
+                onlinePlayers.forEach { player ->
+                    if (player.location.world!=location.world) {
+                        hideFrom(player)
+                        return@forEach
+                    }
+                    if (player.location.distance(location) < Config.distanceTrack) {
+                        headRotationPacket(player)
                     }
                 }
             }
 
-        }, 0, 2)
+        }, 0, 4)
+
+        removeTabTask = Bukkit.getScheduler().runTaskTimer(AstraLibs.instance, Runnable {
+            catching {
+                onlinePlayers.forEach { player ->
+                    if (player.location.world!=location.world) {
+                        hideFrom(player)
+                        return@forEach
+                    }
+                    when {
+                        player.location.distance(location) < Config.distanceHide -> {
+                            showTo(player)
+                            showNPCPacket(player)
+//                            hideFromTabPacketTimed(player)
+                        }
+                        player.location.distance(location) > Config.distanceHide -> hideFrom(player)
+                    }
+                }
+            }
+
+        }, 0, 4)
     }
 
     /**
@@ -115,6 +131,7 @@ class NPC_v1_18_R1(override val empireNPC: EmpireNPC) : NPC {
      * Спавним NPC в мир, ставим скин, ставим Армор Стенды и скрываем обычное имя над головой
      */
     fun spawn() {
+        removeNearArmorStand()
         val profile: GameProfile = GameProfile(UUID.randomUUID(), empireId)//No more than 16 chars
         val world: WorldServer = (location.world as CraftWorld).handle
         val server: MinecraftServer = (Bukkit.getServer() as CraftServer).server
@@ -175,7 +192,6 @@ class NPC_v1_18_R1(override val empireNPC: EmpireNPC) : NPC {
      */
     fun headRotationPacket(player: Player) {
         val location = location.clone().setDirection(player.location.subtract(location.clone()).toVector())
-        val newLoc = location.setDirection(player.location.subtract(location).toVector())
 
         val yaw = location.yaw.toAngle()
         val pitch = location.pitch.toAngle()
@@ -270,7 +286,8 @@ class NPC_v1_18_R1(override val empireNPC: EmpireNPC) : NPC {
         player?.let {
             hideArmorStandPacket(player)
             hideNPCPacket(player)
-            hideFromTabPacketTimed(player)
+            hideFromTab(player)
+//            hideFromTabPacketTimed(player)
         }
     }
 
@@ -284,11 +301,18 @@ class NPC_v1_18_R1(override val empireNPC: EmpireNPC) : NPC {
         scoreboardHideNameTeam.addEntry(empireId)
     }
 
+    private fun removeNearArmorStand() = location.world.entities.forEach { entity ->
+        if (entity !is ArmorStand)
+            return@forEach
+        if (entity.location.distance(location) < 2)
+            entity.remove()
+    }
 
     override fun delete() {
         rotationTask.cancel()
         removeTabTask.cancel()
         despawn()
         viewers.mapNotNull { Bukkit.getPlayer(it.key) }.forEach(this::hideFrom)
+        removeNearArmorStand()
     }
 }
