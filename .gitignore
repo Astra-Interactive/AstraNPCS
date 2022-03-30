@@ -3,3 +3,7 @@
 libs/
 out/
 target/
+astra.properties
+.gradle
+build
+astra.properties

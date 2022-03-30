@@ -1,9 +1,9 @@
 package com.astrainteractive.astranpcs.api
 
-import com.astrainteractive.astralibs.IAstraListener
-import com.astrainteractive.astralibs.callSyncMethod
-import com.astrainteractive.astralibs.runAsyncTask
+import com.astrainteractive.astralibs.EventListener
+import com.astrainteractive.astralibs.async.AsyncHelper
 import com.astrainteractive.astranpcs.AstraNPCS
+import com.astrainteractive.astranpcs.NPCManager
 import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.ProtocolLibrary
 import com.comphenix.protocol.ProtocolManager
@@ -13,7 +13,7 @@ import com.comphenix.protocol.events.PacketEvent
 import com.comphenix.protocol.events.PacketListener
 import com.comphenix.protocol.wrappers.EnumWrappers
 
-class ProtocolLibManager : IAstraListener {
+class ProtocolLibManager : EventListener {
 
     private lateinit var protocolManager: ProtocolManager
     private lateinit var packetListener: PacketListener
@@ -29,7 +29,7 @@ class ProtocolLibManager : IAstraListener {
                 val packet = event.packet
                 val player = event.player
                 val entityId = event.packet.integers.read(0)
-                runAsyncTask {
+                AsyncHelper.runBackground {
                     for (i in 0 until packet.enumEntityUseActions.size()) {
                         if (!packet.enumEntityUseActions.read(i).action.toString()
                                 .equals("INTERACT", ignoreCase = true)
@@ -37,8 +37,8 @@ class ProtocolLibManager : IAstraListener {
                             continue
                         if (packet.enumEntityUseActions.read(i).hand == EnumWrappers.Hand.OFF_HAND)
                             continue
-                        val e = NPCInteractionEvent(player, NPCManager.npcByEntityId(entityId) ?: return@runAsyncTask)
-                        callSyncMethod {
+                        val e = NPCInteractionEvent(player, NPCManager.npcByEntityId(entityId) ?: return@runBackground)
+                        AsyncHelper.callSyncMethod {
                             AstraNPCS.instance.server.pluginManager.callEvent(e)
                         }
                     }

@@ -1,11 +1,11 @@
 package com.astrainteractive.astranpcs.interact
 
-import com.astrainteractive.astralibs.IAstraListener
-import com.astrainteractive.astralibs.IAstraManager
+import com.astrainteractive.astralibs.EventListener
+import com.astrainteractive.astralibs.EventManager
 import com.astrainteractive.astranpcs.api.ProtocolLibManager
 
-class EventManager : IAstraManager {
-    override val handlers: MutableList<IAstraListener> = mutableListOf()
+class EventManager : EventManager {
+    override val handlers: MutableList<EventListener> = mutableListOf()
     init {
         ProtocolLibManager().onEnable(this)
         ClickNPC().onEnable(this)

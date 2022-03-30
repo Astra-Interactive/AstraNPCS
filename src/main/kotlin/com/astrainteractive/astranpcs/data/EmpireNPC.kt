@@ -15,15 +15,15 @@ import java.net.URL
 
 data class EmpireNPC(
     val id: String,
-    val name: String?,
-    val lines: List<String>?,
-    val phrases: List<String>?,
-    val commands: List<Command>,
-    var skin: Skin?,
+    val name: String? = null,
+    val lines: List<String>? = null,
+    val phrases: List<String>? = null,
+    val commands: List<Command> = listOf(),
+    var skin: Skin? = null,
     var location: Location
 ) {
     companion object {
-//        fun ConfigurationSection.getLocation(): Location {
+        //        fun ConfigurationSection.getLocation(): Location {
 //            val world = getString("world")?:"world"
 //            val x = getDouble("x",0.0)
 //            val y = getDouble("y",0.0)
@@ -33,7 +33,7 @@ data class EmpireNPC(
 //            return Location(Bukkit.getWorld(world),x,y,z,yaw,pitch)
 //        }
         fun getList(): List<EmpireNPC> {
-            val config = AstraNPCS.npcsConfig.getConfig().getConfigurationSection("npcs")?:return listOf()
+            val config = AstraNPCS.npcsConfig.getConfig().getConfigurationSection("npcs") ?: return listOf()
             return config.getKeys(false).mapNotNull { id ->
                 val c = config.getConfigurationSection(id) ?: return@mapNotNull null
                 val name = c.getString("name")?.HEX()
@@ -41,12 +41,12 @@ data class EmpireNPC(
                 val phrases = c.getHEXStringList("phrases")
                 val commands = Command.getCommands(c.getConfigurationSection("commands"))
                 val skin = Skin.getSkin(c.getConfigurationSection("skin"))
-                val location = c.getLocation("location")?:return@mapNotNull null
+                val location = c.getLocation("location") ?: return@mapNotNull null
                 EmpireNPC(
                     id = id,
                     name = name,
                     lines = lines,
-                    phrases=phrases,
+                    phrases = phrases,
                     commands = commands,
                     skin = skin,
                     location = location
@@ -54,24 +54,25 @@ data class EmpireNPC(
             }
         }
     }
-    fun save(){
+
+    fun save() {
         val c = AstraNPCS.npcsConfig.getConfig()
-        c.set("npcs.$id.name",name)
-        c.set("npcs.$id.lines",lines)
-        c.set("npcs.$id.phrases",phrases)
-        commands.forEach {cmd->
-            c.set("npcs.$id.commands.${cmd.id}.command",cmd.command)
-            c.set("npcs.$id.commands.${cmd.id}.asConsole",cmd.asConsole)
+        c.set("npcs.$id.name", name)
+        c.set("npcs.$id.lines", lines)
+        c.set("npcs.$id.phrases", phrases)
+        commands.forEach { cmd ->
+            c.set("npcs.$id.commands.${cmd.id}.command", cmd.command)
+            c.set("npcs.$id.commands.${cmd.id}.asConsole", cmd.asConsole)
         }
-        c.set("npcs.$id.skin.value",skin?.value)
-        c.set("npcs.$id.skin.signature",skin?.signature)
-        c.set("npcs.$id.location",location)
+        c.set("npcs.$id.skin.value", skin?.value)
+        c.set("npcs.$id.skin.signature", skin?.signature)
+        c.set("npcs.$id.location", location)
         AstraNPCS.npcsConfig.saveConfig()
     }
 }
 
 data class Command(
-    val id:String,
+    val id: String,
     val command: String,
     val asConsole: Boolean
 ) {
@@ -83,23 +84,24 @@ data class Command(
                     s.getString("$key.command") ?: return@mapNotNull null,
                     s.getBoolean("$key.asConsole", false)
                 )
-            }?: listOf()
+            } ?: listOf()
     }
 }
 
 data class Skin(
     val value: String,
     val signature: String
-){
-    companion object{
-        fun getSkin(s:ConfigurationSection?): Skin? {
-            s?:return null
+) {
+    companion object {
+        fun getSkin(s: ConfigurationSection?): Skin? {
+            s ?: return null
             return Skin(
-                s.getString("value")?:return null,
-                s.getString("signature")?:return null
+                s.getString("value") ?: return null,
+                s.getString("signature") ?: return null
             )
         }
-        fun getSkinByName(name:String)= catchingNoStackTrace {
+
+        fun getSkinByName(name: String) = catchingNoStackTrace {
             val url = URL("https://api.mojang.com/users/profiles/minecraft/$name")
             val reader = InputStreamReader(url.openStream())
             val uuid = JsonParser().parse(reader).asJsonObject.get("id").asString

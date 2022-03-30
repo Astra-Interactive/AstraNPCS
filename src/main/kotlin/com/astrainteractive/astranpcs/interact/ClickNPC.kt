@@ -1,7 +1,7 @@
 package com.astrainteractive.astranpcs.interact
 
 
-import com.astrainteractive.astralibs.IAstraListener
+import com.astrainteractive.astralibs.EventListener
 import com.astrainteractive.astranpcs.api.NPCInteractionEvent
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import kotlin.random.Random
 
-class ClickNPC : IAstraListener {
+class ClickNPC : EventListener {
 
     @EventHandler
     fun onClickNPC(e: NPCInteractionEvent) {
