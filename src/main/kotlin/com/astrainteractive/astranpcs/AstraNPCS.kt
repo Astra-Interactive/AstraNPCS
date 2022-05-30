@@ -3,18 +3,13 @@ package com.astrainteractive.astranpcs
 import com.astrainteractive.astralibs.AstraLibs
 import com.astrainteractive.astralibs.FileManager
 import com.astrainteractive.astralibs.Logger
-import com.astrainteractive.astralibs.async.AsyncHelper
-import com.astrainteractive.astralibs.async.AsyncTask
+import com.astrainteractive.astranpcs.api.NPCManager
 import com.astrainteractive.astranpcs.commands.CommandManager
-import com.astrainteractive.astranpcs.interact.EventManager
+import com.astrainteractive.astranpcs.events.EventManager
 import com.astrainteractive.astranpcs.utils.Config
 import kotlinx.coroutines.*
-import org.bukkit.ChatColor
 import org.bukkit.event.HandlerList
 import org.bukkit.plugin.java.JavaPlugin
-import kotlin.concurrent.timer
-
-
 
 
 class AstraNPCS : JavaPlugin() {

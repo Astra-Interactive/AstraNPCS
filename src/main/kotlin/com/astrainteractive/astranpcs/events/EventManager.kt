@@ -1,4 +1,4 @@
-package com.astrainteractive.astranpcs.interact
+package com.astrainteractive.astranpcs.events
 
 import com.astrainteractive.astralibs.EventListener
 import com.astrainteractive.astralibs.EventManager

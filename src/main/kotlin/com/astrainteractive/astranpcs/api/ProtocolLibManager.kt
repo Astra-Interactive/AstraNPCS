@@ -3,7 +3,6 @@ package com.astrainteractive.astranpcs.api
 import com.astrainteractive.astralibs.EventListener
 import com.astrainteractive.astralibs.async.AsyncHelper
 import com.astrainteractive.astranpcs.AstraNPCS
-import com.astrainteractive.astranpcs.NPCManager
 import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.ProtocolLibrary
 import com.comphenix.protocol.ProtocolManager

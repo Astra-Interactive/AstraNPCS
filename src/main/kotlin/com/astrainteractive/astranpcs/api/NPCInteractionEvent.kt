@@ -5,7 +5,7 @@ import org.bukkit.event.Cancellable
 import org.bukkit.event.Event
 import org.bukkit.event.HandlerList
 
-class NPCInteractionEvent(val player:Player,val clicked: NPC):Event(),Cancellable {
+class NPCInteractionEvent(val player:Player,val clicked: INPC):Event(),Cancellable {
     private var isCancelled = false
     override fun isCancelled(): Boolean {
         return isCancelled

@@ -1,11 +1,10 @@
-package com.astrainteractive.astranpcs
+package com.astrainteractive.astranpcs.api
 
-import com.astrainteractive.astranpcs.api.NPC
 import com.astrainteractive.astranpcs.api.versioned.NPC_v1_18_2_R1
 import com.astrainteractive.astranpcs.data.EmpireNPC
 
 object NPCManager {
-    val registeredNPCs: MutableSet<NPC> = HashSet<NPC>()
+    val registeredNPCs: MutableSet<INPC> = HashSet<INPC>()
     private val empireNPCs: MutableSet<EmpireNPC> = HashSet<EmpireNPC>()
     fun npcByEmpireId(id: String) = registeredNPCs.firstOrNull { it.empireId == id }
     fun npcByEntityId(id: Int) = registeredNPCs.firstOrNull { it.id == id }
@@ -17,8 +16,8 @@ object NPCManager {
         }
     }
 
-    private fun newNPC(empireNPC: EmpireNPC): NPC {
-        val npc: NPC = NPC_v1_18_2_R1(empireNPC)
+    private fun newNPC(empireNPC: EmpireNPC): INPC {
+        val npc: INPC = NPC_v1_18_2_R1(empireNPC)
         registeredNPCs.add(npc)
         return npc
     }

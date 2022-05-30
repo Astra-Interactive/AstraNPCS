@@ -2,7 +2,7 @@ package com.astrainteractive.astranpcs.commands
 
 import com.astrainteractive.astralibs.*
 import com.astrainteractive.astranpcs.AstraNPCS
-import com.astrainteractive.astranpcs.NPCManager
+import com.astrainteractive.astranpcs.api.NPCManager
 import com.astrainteractive.astranpcs.data.EmpireNPC
 import com.astrainteractive.astranpcs.utils.Permissions
 import org.bukkit.ChatColor

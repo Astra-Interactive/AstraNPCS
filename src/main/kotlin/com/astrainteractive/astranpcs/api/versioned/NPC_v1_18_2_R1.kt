@@ -2,9 +2,8 @@ package com.astrainteractive.astranpcs.api.versioned
 
 import com.astrainteractive.astralibs.*
 import com.astrainteractive.astralibs.async.AsyncHelper
-import com.astrainteractive.astralibs.async.AsyncTask
 import com.astrainteractive.astranpcs.AstraTaskTimer
-import com.astrainteractive.astranpcs.api.NPC
+import com.astrainteractive.astranpcs.api.INPC
 import com.astrainteractive.astranpcs.api.NPCViewers
 import com.astrainteractive.astranpcs.data.EmpireNPC
 import com.astrainteractive.astranpcs.data.Skin
@@ -31,14 +30,12 @@ import org.bukkit.craftbukkit.v1_18_R2.util.CraftChatMessage
 import org.bukkit.entity.ArmorStand
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
-import org.bukkit.scheduler.BukkitTask
 import org.bukkit.scoreboard.NameTagVisibility
 import org.bukkit.scoreboard.Team
 import java.util.*
-import kotlin.collections.HashMap
 
 
-class NPC_v1_18_2_R1(override val empireNPC: EmpireNPC) : NPC {
+class NPC_v1_18_2_R1(override val empireNPC: EmpireNPC) : INPC {
     /**
      * Здесь хранится ссылка на NPC
      */
