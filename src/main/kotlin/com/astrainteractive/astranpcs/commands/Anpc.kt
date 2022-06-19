@@ -3,7 +3,8 @@ package com.astrainteractive.astranpcs.commands
 import com.astrainteractive.astralibs.*
 import com.astrainteractive.astranpcs.AstraNPCS
 import com.astrainteractive.astranpcs.api.NPCManager
-import com.astrainteractive.astranpcs.data.EmpireNPC
+import com.astrainteractive.astranpcs.data.AstraNPCYaml
+import com.astrainteractive.astranpcs.data.astraNPCYaml
 import com.astrainteractive.astranpcs.utils.Permissions
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
@@ -42,11 +43,12 @@ class Anpc {
             player.sendMessage("${ChatColor.YELLOW}Вы не ввели ID")
             return
         }
-        val npc = EmpireNPC(
+        val npc = AstraNPCYaml.YamlNPC(
             id = id,
-            location = location
+            location = AstraNPCYaml.YamlNPC.YamlLocation.fromBukkitLocation(location)
         )
-        npc.save()
+        astraNPCYaml.npcs[id] = npc
+        astraNPCYaml.save()
         AstraNPCS.instance.reload()
 
     }

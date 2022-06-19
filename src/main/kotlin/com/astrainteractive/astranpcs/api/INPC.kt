@@ -1,6 +1,6 @@
 package com.astrainteractive.astranpcs.api
 
-import com.astrainteractive.astranpcs.data.EmpireNPC
+import com.astrainteractive.astranpcs.data.AstraNPCYaml
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.entity.Player
@@ -9,7 +9,7 @@ interface INPC {
     /**
      * Ссылка на Data-объект
      */
-    val empireNPC: EmpireNPC
+    val empireNPC: AstraNPCYaml.YamlNPC
 
     /**
      * ID Npc в yml файле
@@ -21,12 +21,13 @@ interface INPC {
      * @return Location of NPC
      */
     val location: Location
-        get() = empireNPC.location
+        get() = empireNPC.location.bukkitLocation
 
     /**
      * @return unique id of minecraft entity
      */
     val id: Int
+    val hash:Int?
 
     /**
      * Show npc to all online players

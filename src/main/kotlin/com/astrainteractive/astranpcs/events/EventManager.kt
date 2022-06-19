@@ -1,13 +1,21 @@
 package com.astrainteractive.astranpcs.events
 
-import com.astrainteractive.astralibs.EventListener
-import com.astrainteractive.astralibs.EventManager
+import com.astrainteractive.astralibs.AstraLibs
+import com.astrainteractive.astralibs.Logger
+import com.astrainteractive.astralibs.events.EventListener
 import com.astrainteractive.astranpcs.api.ProtocolLibManager
+import org.bukkit.Bukkit
 
-class EventManager : EventManager {
+class EventManager : com.astrainteractive.astralibs.events.EventManager {
     override val handlers: MutableList<EventListener> = mutableListOf()
+
     init {
-        ProtocolLibManager().onEnable(this)
+//        Bukkit.getServer().pluginManager.getPlugin("ProtocolLib")?.let {
+//            ProtocolLibManager().onEnable(this)
+//        }?:run{
+//            Logger.error("Missing ProtocolLib","AstraNPC")
+//        }
+
         ClickNPC().onEnable(this)
     }
 }

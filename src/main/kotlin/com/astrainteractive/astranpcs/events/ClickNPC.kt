@@ -1,14 +1,17 @@
 package com.astrainteractive.astranpcs.events
 
 
-import com.astrainteractive.astralibs.EventListener
+import com.astrainteractive.astralibs.events.EventListener
 import com.astrainteractive.astranpcs.api.NPCInteractionEvent
+import com.astrainteractive.astranpcs.api.NPCManager
 import org.bukkit.Bukkit
+import org.bukkit.entity.ArmorStand
 import org.bukkit.event.EventHandler
+import org.bukkit.event.entity.EntityDamageByEntityEvent
+import org.bukkit.event.entity.EntityDamageEvent
+import org.bukkit.event.entity.EntityInteractEvent
 import org.bukkit.event.entity.PlayerDeathEvent
-import org.bukkit.event.player.PlayerJoinEvent
-import org.bukkit.event.player.PlayerMoveEvent
-import org.bukkit.event.player.PlayerQuitEvent
+import org.bukkit.event.player.*
 import kotlin.random.Random
 
 class ClickNPC : EventListener {
@@ -22,7 +25,7 @@ class ClickNPC : EventListener {
             val phrase = phrases[Random.nextInt(phrases.size)]
             e.player.sendMessage(phrase)
         }
-        for (command in enpc.commands?: listOf()){
+        enpc.commands.forEach { t, command ->
             if (command.asConsole)
                 Bukkit.dispatchCommand(Bukkit.getServer().consoleSender,command.command)
             else
@@ -33,20 +36,12 @@ class ClickNPC : EventListener {
 
 
     @EventHandler
-    fun onPlayerMove(e: PlayerMoveEvent) {
+    fun entityDamageEvent(e: EntityDamageEvent) {
+        println("entityDamageEvent ${e.entity.type}")
+        val armorStand = e.entity as? ArmorStand?:return
+        NPCManager.registeredModels.firstOrNull { it.armorStand==armorStand }?:return
+        e.isCancelled = true
     }
-
-    @EventHandler
-    fun playerJoinEvent(e:PlayerJoinEvent){
-
-    }
-    @EventHandler
-    fun playerQuitEvent(e:PlayerQuitEvent){
-    }
-    @EventHandler
-    fun playerDeathEvent(e:PlayerDeathEvent){
-    }
-
 
     public override fun onDisable() {
     }
