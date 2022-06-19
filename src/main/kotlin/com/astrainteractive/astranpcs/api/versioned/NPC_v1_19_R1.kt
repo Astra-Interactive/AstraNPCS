@@ -1,17 +1,21 @@
 package com.astrainteractive.astranpcs.api.versioned
 
-import com.astrainteractive.astralibs.HEX
+
 import com.astrainteractive.astralibs.async.AsyncHelper
 import com.astrainteractive.astralibs.catching
 import com.astrainteractive.astralibs.convertHex
 import com.astrainteractive.astranpcs.AstraTaskTimer
-import com.astrainteractive.astranpcs.api.*
+import com.astrainteractive.astranpcs.api.INPC
+import com.astrainteractive.astranpcs.api.NPCViewers
+import com.astrainteractive.astranpcs.api.versioned.NMSUtil.asEntityArmorStand
+import com.astrainteractive.astranpcs.api.versioned.NMSUtil.connection
+import com.astrainteractive.astranpcs.api.versioned.NMSUtil.toIChatBaseComponent
+import com.astrainteractive.astranpcs.api.versioned.NMSUtil.worldServer
 import com.astrainteractive.astranpcs.data.AstraNPCYaml
 import com.astrainteractive.astranpcs.data.CONFIG
 import com.astrainteractive.astranpcs.data.astraNPCYaml
 import com.mojang.authlib.GameProfile
 import com.mojang.authlib.properties.Property
-import com.ticxo.modelengine.api.ModelEngineAPI
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -20,25 +24,12 @@ import net.minecraft.network.protocol.game.*
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.EntityPlayer
 import net.minecraft.server.level.WorldServer
-import net.minecraft.server.network.PlayerConnection
-import net.minecraft.world.effect.MobEffect
-import net.minecraft.world.effect.MobEffectList
-import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.EntityLiving
 import net.minecraft.world.entity.player.EntityHuman
 import org.bukkit.Bukkit
 import org.bukkit.Location
-import org.bukkit.craftbukkit.v1_19_R1.CraftServer
-import org.bukkit.craftbukkit.v1_19_R1.CraftWorld
-import org.bukkit.craftbukkit.v1_19_R1.entity.CraftArmorStand
-import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer
-import org.bukkit.craftbukkit.v1_19_R1.util.CraftChatMessage
 import org.bukkit.entity.ArmorStand
 import org.bukkit.entity.EntityType
-import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
-import org.bukkit.potion.PotionEffect
-import org.bukkit.potion.PotionEffectType
 import org.bukkit.scoreboard.NameTagVisibility
 import org.bukkit.scoreboard.Team
 import java.util.*
@@ -71,8 +62,6 @@ class NPC_v1_19_R1(override val empireNPC: AstraNPCYaml.YamlNPC) : INPC {
     private fun EntityPlayer.setLocation(l: Location) =
         (this as net.minecraft.world.entity.Entity).a(l.x, l.y, l.z, l.yaw, l.pitch)
 
-    private fun Player.connection(): PlayerConnection =
-        (this as CraftPlayer).handle.b
 
     private val onlinePlayers: MutableCollection<out Player>
         get() = Bukkit.getOnlinePlayers()
@@ -81,7 +70,6 @@ class NPC_v1_19_R1(override val empireNPC: AstraNPCYaml.YamlNPC) : INPC {
     private fun Float.toAngle(): Byte =
         (this * 256 / 360).toInt().toByte()
 
-    private fun ArmorStand.asEntityArmorStand() = (this as CraftArmorStand).handle
     private lateinit var removeTabTask: AstraTaskTimer
     private lateinit var rotationTask: AstraTaskTimer
 
@@ -155,11 +143,11 @@ class NPC_v1_19_R1(override val empireNPC: AstraNPCYaml.YamlNPC) : INPC {
     override fun spawn() {
         removeNearArmorStand()
         val profile: GameProfile = GameProfile(UUID.randomUUID(), empireId)//No more than 16 chars
-        val world: WorldServer = (location.world as CraftWorld).handle
-        val server: MinecraftServer = (Bukkit.getServer() as CraftServer).server
+        val world: WorldServer = location.worldServer
+        val server: MinecraftServer = NMSUtil.minecraftServer
         entityPlayer = EntityPlayer(server, world, profile, null)
         entityPlayer.setLocation(location)
-        entityPlayer.listName = CraftChatMessage.fromString(empireNPC.name?.HEX() ?: "").first()
+        entityPlayer.listName = empireNPC.name.toIChatBaseComponent
         if (empireNPC.skin != null)
             setSkin(empireNPC.skin)
         setArmorStandName()
