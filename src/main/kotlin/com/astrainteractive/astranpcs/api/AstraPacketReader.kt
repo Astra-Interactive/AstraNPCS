@@ -4,7 +4,9 @@ import com.astrainteractive.astralibs.catching
 import io.netty.channel.Channel
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.MessageToMessageDecoder
+import net.minecraft.network.PacketListener
 import net.minecraft.network.protocol.Packet
+import net.minecraft.network.protocol.game.PacketPlayInUseEntity
 import org.bukkit.Bukkit
 import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer
 import org.bukkit.entity.Player
@@ -23,8 +25,9 @@ abstract class AstraPacketReader<T : Packet<*>> {
         channels.keys.forEach { deInject(it) }
         channels.clear()
     }
+    abstract val clazz:Class<out T>
 
-    fun decoder(player: Player) = object : MessageToMessageDecoder<T>() {
+    fun decoder(player: Player) = object : MessageToMessageDecoder<T>(clazz) {
         override fun decode(ctx: ChannelHandlerContext?, packet: T?, arg: MutableList<Any>?) {
             packet ?: return
             arg ?: return
