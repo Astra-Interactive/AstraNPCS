@@ -1,7 +1,7 @@
 package com.astrainteractive.astranpcs.events
 
 
-import com.astrainteractive.astralibs.EventListener
+import com.astrainteractive.astralibs.events.EventListener
 import com.astrainteractive.astranpcs.api.NPCInteractionEvent
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler

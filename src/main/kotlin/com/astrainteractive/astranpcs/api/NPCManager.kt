@@ -1,6 +1,6 @@
 package com.astrainteractive.astranpcs.api
 
-import com.astrainteractive.astranpcs.api.versioned.NPC_v1_18_2_R1
+import com.astrainteractive.astranpcs.api.versioned.NPC_v1_19_R1
 import com.astrainteractive.astranpcs.data.EmpireNPC
 
 object NPCManager {
@@ -17,7 +17,7 @@ object NPCManager {
     }
 
     private fun newNPC(empireNPC: EmpireNPC): INPC {
-        val npc: INPC = NPC_v1_18_2_R1(empireNPC)
+        val npc: INPC = NPC_v1_19_R1(empireNPC)
         registeredNPCs.add(npc)
         return npc
     }

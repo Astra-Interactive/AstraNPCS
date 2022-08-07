@@ -1,6 +1,9 @@
 package com.astrainteractive.astranpcs.commands
 
 import com.astrainteractive.astralibs.*
+import com.astrainteractive.astralibs.utils.registerCommand
+import com.astrainteractive.astralibs.utils.registerTabCompleter
+import com.astrainteractive.astralibs.utils.withEntry
 import com.astrainteractive.astranpcs.AstraNPCS
 import com.astrainteractive.astranpcs.api.NPCManager
 import com.astrainteractive.astranpcs.data.EmpireNPC

@@ -1,10 +1,9 @@
 package com.astrainteractive.astranpcs.data
 
 
-import com.astrainteractive.astralibs.HEX
-import com.astrainteractive.astralibs.catchingNoStackTrace
-import com.astrainteractive.astralibs.getFloat
-import com.astrainteractive.astralibs.getHEXStringList
+import com.astrainteractive.astralibs.utils.HEX
+import com.astrainteractive.astralibs.utils.catching
+import com.astrainteractive.astralibs.utils.getHEXStringList
 import com.astrainteractive.astranpcs.AstraNPCS
 import com.google.gson.JsonParser
 import org.bukkit.Bukkit
@@ -101,7 +100,7 @@ data class Skin(
             )
         }
 
-        fun getSkinByName(name: String) = catchingNoStackTrace {
+        fun getSkinByName(name: String) = catching {
             val url = URL("https://api.mojang.com/users/profiles/minecraft/$name")
             val reader = InputStreamReader(url.openStream())
             val uuid = JsonParser().parse(reader).asJsonObject.get("id").asString

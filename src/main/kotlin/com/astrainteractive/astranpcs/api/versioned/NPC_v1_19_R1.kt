@@ -1,10 +1,16 @@
 package com.astrainteractive.astranpcs.api.versioned
 
-import com.astrainteractive.astralibs.*
 import com.astrainteractive.astralibs.async.AsyncHelper
+import com.astrainteractive.astralibs.utils.catching
+import com.astrainteractive.astralibs.utils.convertHex
+import com.astrainteractive.astranpcs.AstraNPCS
 import com.astrainteractive.astranpcs.AstraTaskTimer
 import com.astrainteractive.astranpcs.api.INPC
 import com.astrainteractive.astranpcs.api.NPCViewers
+import com.astrainteractive.astranpcs.api.versioned.NMSUtil.asEntityArmorStand
+import com.astrainteractive.astranpcs.api.versioned.NMSUtil.connection
+import com.astrainteractive.astranpcs.api.versioned.NMSUtil.toIChatBaseComponent
+import com.astrainteractive.astranpcs.api.versioned.NMSUtil.worldServer
 import com.astrainteractive.astranpcs.data.EmpireNPC
 import com.astrainteractive.astranpcs.data.Skin
 import com.astrainteractive.astranpcs.utils.Config
@@ -18,24 +24,19 @@ import net.minecraft.network.protocol.game.*
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.EntityPlayer
 import net.minecraft.server.level.WorldServer
-import net.minecraft.server.network.PlayerConnection
 import net.minecraft.world.entity.player.EntityHuman
 import org.bukkit.Bukkit
 import org.bukkit.Location
-import org.bukkit.craftbukkit.v1_18_R2.CraftServer
-import org.bukkit.craftbukkit.v1_18_R2.CraftWorld
-import org.bukkit.craftbukkit.v1_18_R2.entity.CraftArmorStand
-import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer
-import org.bukkit.craftbukkit.v1_18_R2.util.CraftChatMessage
 import org.bukkit.entity.ArmorStand
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import org.bukkit.scoreboard.NameTagVisibility
 import org.bukkit.scoreboard.Team
 import java.util.*
+import kotlin.collections.HashMap
 
 
-class NPC_v1_18_2_R1(override val empireNPC: EmpireNPC) : INPC {
+class NPC_v1_19_R1(override val empireNPC: EmpireNPC) : INPC {
     /**
      * Здесь хранится ссылка на NPC
      */
@@ -60,8 +61,6 @@ class NPC_v1_18_2_R1(override val empireNPC: EmpireNPC) : INPC {
     private fun EntityPlayer.setLocation(l: Location) =
         (this as net.minecraft.world.entity.Entity).a(l.x, l.y, l.z, l.yaw, l.pitch)
 
-    private fun Player.connection(): PlayerConnection =
-        (this as CraftPlayer).handle.b
 
     private val onlinePlayers: MutableCollection<out Player>
         get() = Bukkit.getOnlinePlayers()
@@ -70,7 +69,6 @@ class NPC_v1_18_2_R1(override val empireNPC: EmpireNPC) : INPC {
     private fun Float.toAngle(): Byte =
         (this * 256 / 360).toInt().toByte()
 
-    private fun ArmorStand.asEntityArmorStand() = (this as CraftArmorStand).handle
     private lateinit var removeTabTask: AstraTaskTimer
     private lateinit var rotationTask: AstraTaskTimer
 
@@ -125,6 +123,7 @@ class NPC_v1_18_2_R1(override val empireNPC: EmpireNPC) : INPC {
                 isCustomNameVisible = true
                 isInvisible = true
                 isInvulnerable = true
+                this.setCanMove(false)
             }
         } ?: listOf()
     }
@@ -133,8 +132,10 @@ class NPC_v1_18_2_R1(override val empireNPC: EmpireNPC) : INPC {
     private fun removeNearArmorStand() = location.world.entities.forEach { entity ->
         if (entity !is ArmorStand)
             return@forEach
+        val intArray: IntArray = arrayOf(0, 1).toIntArray()
         if (entity.location.distance(location) < 2)
             entity.remove()
+
     }
 
     /**
@@ -143,17 +144,18 @@ class NPC_v1_18_2_R1(override val empireNPC: EmpireNPC) : INPC {
     override fun spawn() {
         removeNearArmorStand()
         val profile: GameProfile = GameProfile(UUID.randomUUID(), empireId)//No more than 16 chars
-        val world: WorldServer = (location.world as CraftWorld).handle
-        val server: MinecraftServer = (Bukkit.getServer() as CraftServer).server
-        entityPlayer = EntityPlayer(server, world, profile)
+        val world: WorldServer = location.worldServer
+        val server: MinecraftServer = NMSUtil.minecraftServer
+        entityPlayer = EntityPlayer(server, world, profile, null)
         entityPlayer.setLocation(location)
-        entityPlayer.listName = CraftChatMessage.fromString(empireNPC.name?.HEX() ?: "").first()
+        entityPlayer.listName = empireNPC.name?.toIChatBaseComponent
         if (empireNPC.skin != null)
             setSkin(empireNPC.skin)
         setArmorStandName()
         hideName()
         setRotationTask()
         setRemoveTabTask()
+
     }
 
 
@@ -178,7 +180,7 @@ class NPC_v1_18_2_R1(override val empireNPC: EmpireNPC) : INPC {
         )
         sendPacket(player, lookPacket)
         AsyncHelper.launch {
-            delay(Config.removeListTime)
+            delay(Config.removeListTime.toLong())
             AsyncHelper.callSyncMethod {
                 hideFromTab(player)
             }
@@ -187,12 +189,11 @@ class NPC_v1_18_2_R1(override val empireNPC: EmpireNPC) : INPC {
 
 
     override fun setSkinByName(name: String) {
-        AsyncHelper.runBackground {
-            val skin = Skin.getSkinByName(name) ?: return@runBackground
+        AsyncHelper.launch {
+            val skin = Skin.getSkinByName(name) ?: return@launch
             AsyncHelper.callSyncMethod {
                 despawn()
                 empireNPC.skin = skin
-                empireNPC.save()
                 spawn()
             }
         }
@@ -205,8 +206,9 @@ class NPC_v1_18_2_R1(override val empireNPC: EmpireNPC) : INPC {
         spawn()
     }
 
+    // GameProfile
     private fun setSkin(skin: Skin?) =
-        (entityPlayer as EntityHuman).fq().properties.put(
+        (entityPlayer as EntityHuman).fz().properties.put(
             "textures",
             Property("textures", skin?.value, skin?.signature)
         )
@@ -254,6 +256,7 @@ class NPC_v1_18_2_R1(override val empireNPC: EmpireNPC) : INPC {
         showArmorStandPacket(player)
         lookAtPlayer(player)
     }
+
     private fun hideFromTab(p: Player?) {
         val packet = PacketPlayOutPlayerInfo(
             PacketPlayOutPlayerInfo.EnumPlayerInfoAction.e,
@@ -261,6 +264,7 @@ class NPC_v1_18_2_R1(override val empireNPC: EmpireNPC) : INPC {
         )
         sendPacket(p, packet)
     }
+
     override fun hideFrom(player: Player?) {
         /**
          * Отправляем пакет, который спрячет Армор стенды

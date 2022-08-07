@@ -4,8 +4,9 @@ import com.astrainteractive.astralibs.AstraLibs
 import com.astrainteractive.astralibs.FileManager
 import com.astrainteractive.astralibs.Logger
 import com.astrainteractive.astranpcs.api.NPCManager
+import com.astrainteractive.astranpcs.api.PacketReader
 import com.astrainteractive.astranpcs.commands.CommandManager
-import com.astrainteractive.astranpcs.events.EventManager
+import com.astrainteractive.astranpcs.events.MyEventManager
 import com.astrainteractive.astranpcs.utils.Config
 import kotlinx.coroutines.*
 import org.bukkit.event.HandlerList
@@ -20,18 +21,19 @@ class AstraNPCS : JavaPlugin() {
         lateinit var npcsConfig: FileManager
     }
 
-    private lateinit var eventManager: EventManager
+    private lateinit var eventManager: MyEventManager
 
     override fun onEnable() {
 
-        AstraLibs.create(this)
-        Logger.init("AstraNPCS")
+        AstraLibs.rememberPlugin(this)
+        Logger.prefix = "AstraNPCS"
         npcsConfig = FileManager("npcs.yml")
         Config.load()
         instance = this
         NPCManager.onEnable()
         CommandManager()
-        eventManager = EventManager()
+        eventManager = MyEventManager()
+        PacketReader.onEnable()
     }
 
     override fun onDisable() {
@@ -39,6 +41,7 @@ class AstraNPCS : JavaPlugin() {
         eventManager.onDisable()
         HandlerList.unregisterAll(this)
         NPCManager.onDisable()
+        PacketReader.onDisable()
     }
 
     fun reload() {
