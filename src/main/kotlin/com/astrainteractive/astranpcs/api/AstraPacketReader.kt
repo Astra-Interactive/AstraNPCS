@@ -16,7 +16,7 @@ import java.lang.reflect.Field
 import java.util.*
 import kotlin.collections.HashMap
 
-abstract class AstraPacketReader<T : Packet<*>> {
+abstract class _AstraPacketReader<T : Packet<*>> {
     private val channels: MutableMap<UUID, Channel> = HashMap()
     fun onEnable() {
         onDisable()

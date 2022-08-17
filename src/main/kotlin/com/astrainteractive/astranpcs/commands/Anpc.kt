@@ -20,7 +20,7 @@ class Anpc {
         if (sender !is Player)
             return@registerCommand
 
-        if (!sender.hasPermission(Permissions.CREATE_NPC))
+        if (!Permissions.CreateNPC.hasPermission(sender))
             return@registerCommand
 
         if (args.firstOrNull().equals("create", ignoreCase = true))

@@ -2,6 +2,7 @@ package com.astrainteractive.astranpcs.api
 
 import com.astrainteractive.astralibs.async.AsyncHelper
 import com.astrainteractive.astralibs.events.DSLEvent
+import com.astrainteractive.astralibs.utils.AstraPacketReader
 import io.netty.channel.Channel
 import net.minecraft.network.protocol.game.PacketPlayInUseEntity
 import net.minecraft.world.EnumHand
@@ -14,7 +15,9 @@ import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.event.player.PlayerRespawnEvent
 
-
+/**
+ * Handling interactions on custom NPCS
+ */
 object PacketReader : AstraPacketReader<PacketPlayInUseEntity>() {
 
     override val Player.provideChannel: Channel

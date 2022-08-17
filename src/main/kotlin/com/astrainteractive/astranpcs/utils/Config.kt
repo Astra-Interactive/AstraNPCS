@@ -1,15 +1,18 @@
 package com.astrainteractive.astranpcs.utils
 
-import com.astrainteractive.astranpcs.AstraNPCS
-
-object Config {
-    var distanceTrack:Long = 10L
-    var distanceHide:Long = 30L
-    var removeListTime:Long = 50L
-    fun load(){
-        val c = AstraNPCS.npcsConfig.getConfig().getConfigurationSection("config")?:return
-        distanceTrack = c.getLong("distanceTrack",distanceTrack)
-        distanceHide = c.getLong("distanceHide",distanceHide)
-        removeListTime = c.getLong("removeListTime",removeListTime)
+class Config(
+    val distanceTrack: Long = 10L,
+    val distanceHide: Long = 30L,
+    val removeListTime: Long = 50L,
+) {
+    companion object {
+        fun create(): Config {
+            val c = Files.configFile.getConfig().getConfigurationSection("config") ?: return Config()
+            return Config(
+                c.getLong("distanceTrack", 10L),
+                c.getLong("distanceHide", 30L),
+                c.getLong("removeListTime", 50L)
+            )
+        }
     }
 }

@@ -5,6 +5,7 @@ import com.astrainteractive.astralibs.utils.HEX
 import com.astrainteractive.astralibs.utils.catching
 import com.astrainteractive.astralibs.utils.getHEXStringList
 import com.astrainteractive.astranpcs.AstraNPCS
+import com.astrainteractive.astranpcs.utils.Files
 import com.google.gson.JsonParser
 import org.bukkit.Bukkit
 import org.bukkit.Location
@@ -32,7 +33,7 @@ data class EmpireNPC(
 //            return Location(Bukkit.getWorld(world),x,y,z,yaw,pitch)
 //        }
         fun getList(): List<EmpireNPC> {
-            val config = AstraNPCS.npcsConfig.getConfig().getConfigurationSection("npcs") ?: return listOf()
+            val config = Files.configFile.getConfig().getConfigurationSection("npcs") ?: return listOf()
             return config.getKeys(false).mapNotNull { id ->
                 val c = config.getConfigurationSection(id) ?: return@mapNotNull null
                 val name = c.getString("name")?.HEX()
@@ -55,7 +56,7 @@ data class EmpireNPC(
     }
 
     fun save() {
-        val c = AstraNPCS.npcsConfig.getConfig()
+        val c = Files.configFile.getConfig()
         c.set("npcs.$id.name", name)
         c.set("npcs.$id.lines", lines)
         c.set("npcs.$id.phrases", phrases)
@@ -66,7 +67,7 @@ data class EmpireNPC(
         c.set("npcs.$id.skin.value", skin?.value)
         c.set("npcs.$id.skin.signature", skin?.signature)
         c.set("npcs.$id.location", location)
-        AstraNPCS.npcsConfig.saveConfig()
+        Files.configFile.saveConfig()
     }
 }
 

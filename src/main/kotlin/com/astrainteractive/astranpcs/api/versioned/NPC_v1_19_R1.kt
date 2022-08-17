@@ -1,9 +1,9 @@
 package com.astrainteractive.astranpcs.api.versioned
 
 import com.astrainteractive.astralibs.async.AsyncHelper
+import com.astrainteractive.astralibs.utils.Injector.inject
 import com.astrainteractive.astralibs.utils.catching
 import com.astrainteractive.astralibs.utils.convertHex
-import com.astrainteractive.astranpcs.AstraNPCS
 import com.astrainteractive.astranpcs.AstraTaskTimer
 import com.astrainteractive.astranpcs.api.INPC
 import com.astrainteractive.astranpcs.api.NPCViewers
@@ -33,10 +33,10 @@ import org.bukkit.entity.Player
 import org.bukkit.scoreboard.NameTagVisibility
 import org.bukkit.scoreboard.Team
 import java.util.*
-import kotlin.collections.HashMap
 
 
 class NPC_v1_19_R1(override val empireNPC: EmpireNPC) : INPC {
+    private val config: Config = inject()!!
     /**
      * Здесь хранится ссылка на NPC
      */
@@ -81,7 +81,7 @@ class NPC_v1_19_R1(override val empireNPC: EmpireNPC) : INPC {
                         hideFrom(player)
                         return@forEach
                     }
-                    if (player.location.distance(location) < Config.distanceTrack) {
+                    if (player.location.distance(location) < config.distanceTrack) {
                         lookAtPlayer(player)
                     }
                 }
@@ -99,12 +99,12 @@ class NPC_v1_19_R1(override val empireNPC: EmpireNPC) : INPC {
                         return@forEach
                     }
                     when {
-                        player.location.distance(location) < Config.distanceHide -> {
+                        player.location.distance(location) < config.distanceHide -> {
                             showTo(player)
 //                            showNPCPacket(player)
 //                            hideFromTabPacketTimed(player)
                         }
-                        player.location.distance(location) > Config.distanceHide -> hideFrom(player)
+                        player.location.distance(location) > config.distanceHide -> hideFrom(player)
                     }
                 }
             }
@@ -180,7 +180,7 @@ class NPC_v1_19_R1(override val empireNPC: EmpireNPC) : INPC {
         )
         sendPacket(player, lookPacket)
         AsyncHelper.launch {
-            delay(Config.removeListTime.toLong())
+            delay(config.removeListTime.toLong())
             AsyncHelper.callSyncMethod {
                 hideFromTab(player)
             }

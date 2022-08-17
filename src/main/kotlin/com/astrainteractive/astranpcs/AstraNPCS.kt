@@ -1,13 +1,17 @@
 package com.astrainteractive.astranpcs
 
 import com.astrainteractive.astralibs.AstraLibs
-import com.astrainteractive.astralibs.FileManager
 import com.astrainteractive.astralibs.Logger
+import com.astrainteractive.astralibs.events.GlobalEventManager
+import com.astrainteractive.astralibs.utils.Injector.module
+import com.astrainteractive.astralibs.utils.Injector.remember
 import com.astrainteractive.astranpcs.api.NPCManager
 import com.astrainteractive.astranpcs.api.PacketReader
+import com.astrainteractive.astranpcs.api.remote.IMojangApiBuilder
+import com.astrainteractive.astranpcs.api.remote.MojangApi
 import com.astrainteractive.astranpcs.commands.CommandManager
-import com.astrainteractive.astranpcs.events.MyEventManager
-import com.astrainteractive.astranpcs.utils.Config
+import com.astrainteractive.astranpcs.events.ClickNpcEvent
+import com.astrainteractive.astranpcs.utils.*
 import kotlinx.coroutines.*
 import org.bukkit.event.HandlerList
 import org.bukkit.plugin.java.JavaPlugin
@@ -18,28 +22,34 @@ class AstraNPCS : JavaPlugin() {
 
     companion object {
         lateinit var instance: AstraNPCS
-        lateinit var npcsConfig: FileManager
     }
 
-    private lateinit var eventManager: MyEventManager
+    private val mojangApi by lazy {
+        IMojangApiBuilder.build()
+    }
+    init {
+        instance = this
+    }
 
     override fun onEnable() {
 
         AstraLibs.rememberPlugin(this)
         Logger.prefix = "AstraNPCS"
-        npcsConfig = FileManager("npcs.yml")
-        Config.load()
-        instance = this
-        NPCManager.onEnable()
-        CommandManager()
-        eventManager = MyEventManager()
-        PacketReader.onEnable()
+        module {
+            remember(CommandManager())
+            remember(_Files())
+            NPCManager.onEnable()
+            ClickNpcEvent()
+            remember(Config.create())
+            PacketReader.onEnable()
+            remember(MojangApi(mojangApi))
+        }
     }
 
     override fun onDisable() {
         runBlocking { AstraTaskTimer.cancelJobs() }
-        eventManager.onDisable()
         HandlerList.unregisterAll(this)
+        GlobalEventManager.onDisable()
         NPCManager.onDisable()
         PacketReader.onDisable()
     }
