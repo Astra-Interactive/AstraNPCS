@@ -2,8 +2,8 @@ package com.astrainteractive.astranpcs.api.versioned
 
 
 import com.astrainteractive.astralibs.async.AsyncHelper
-import com.astrainteractive.astralibs.catching
-import com.astrainteractive.astralibs.convertHex
+import com.astrainteractive.astralibs.utils.catching
+import com.astrainteractive.astralibs.utils.convertHex
 import com.astrainteractive.astranpcs.AstraTaskTimer
 import com.astrainteractive.astranpcs.api.INPC
 import com.astrainteractive.astranpcs.api.NPCViewers
@@ -211,7 +211,7 @@ class NPC_v1_19_R1(override val empireNPC: AstraNPCYaml.YamlNPC) : INPC {
 
     // GameProfile
     private fun setSkin(skin: AstraNPCYaml.YamlNPC.Skin?) =
-        (entityPlayer as EntityHuman).fz().properties.put(
+        (entityPlayer as EntityHuman).fy().properties.put(
             "textures",
             Property("textures", skin?.value, skin?.signature)
         )

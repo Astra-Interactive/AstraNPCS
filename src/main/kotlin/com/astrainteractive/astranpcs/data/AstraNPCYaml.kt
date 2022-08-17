@@ -1,7 +1,7 @@
 package com.astrainteractive.astranpcs.data
 
 import com.astrainteractive.astralibs.EmpireSerializer
-import com.astrainteractive.astralibs.catching
+import com.astrainteractive.astralibs.utils.catching
 import com.astrainteractive.astranpcs.AstraNPCS
 import com.charleskorn.kaml.Yaml
 import com.google.gson.JsonParser

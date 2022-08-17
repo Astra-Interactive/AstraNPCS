@@ -1,6 +1,6 @@
 package com.astrainteractive.astranpcs.api.versioned
 
-import com.astrainteractive.astralibs.HEX
+import com.astrainteractive.astralibs.utils.HEX
 import net.minecraft.server.level.WorldServer
 import net.minecraft.server.network.PlayerConnection
 import org.bukkit.Bukkit

@@ -50,7 +50,7 @@ repositories {
 }
 
 dependencies {
-    val spigot = "1.19-R0.1-SNAPSHOT"
+    val spigot = "1.19.2-R0.1-SNAPSHOT"
     val placeholderapi = "2.11.1"
     val protocolLib = "4.8.0"
     val worldguard = "7.0.5"

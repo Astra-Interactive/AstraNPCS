@@ -1,6 +1,6 @@
 package com.astrainteractive.astranpcs.api
 
-import com.astrainteractive.astralibs.catching
+import com.astrainteractive.astralibs.utils.catching
 import io.netty.channel.Channel
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.MessageToMessageDecoder

@@ -1,6 +1,5 @@
 package com.astrainteractive.astranpcs.api
 
-import com.astrainteractive.astralibs.convertHex
 import com.astrainteractive.astranpcs.api.versioned.NPC_v1_19_R1
 import com.astrainteractive.astranpcs.data.AstraNPCYaml
 import com.astrainteractive.astranpcs.data.empireNPCS
