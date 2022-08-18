@@ -36,11 +36,11 @@ class AstraNPCS : JavaPlugin() {
         AstraLibs.rememberPlugin(this)
         Logger.prefix = "AstraNPCS"
         module {
-            remember(CommandManager())
-            remember(_Files())
+            CommandManager()
+            IFiles()
+            IConfig.create()
             NPCManager.onEnable()
             ClickNpcEvent()
-            remember(Config.create())
             PacketReader.onEnable()
             remember(MojangApi(mojangApi))
         }

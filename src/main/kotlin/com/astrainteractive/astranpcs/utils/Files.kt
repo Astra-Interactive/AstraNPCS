@@ -2,14 +2,14 @@ package com.astrainteractive.astranpcs.utils
 
 import com.astrainteractive.astralibs.FileManager
 
-val Files: _Files
-    get() = _Files.instance
+val Files: IFiles
+    get() = IFiles.instance
 
-class _Files {
+class IFiles {
     val configFile: FileManager =
         FileManager("config.yml")
     companion object {
-        lateinit var instance: _Files
+        lateinit var instance: IFiles
     }
 
     init {

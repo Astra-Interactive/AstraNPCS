@@ -1,6 +1,7 @@
 package com.astrainteractive.astranpcs.data
 
 
+import com.astrainteractive.astralibs.Logger
 import com.astrainteractive.astralibs.utils.HEX
 import com.astrainteractive.astralibs.utils.catching
 import com.astrainteractive.astralibs.utils.getHEXStringList
@@ -20,7 +21,7 @@ data class EmpireNPC(
     val phrases: List<String>? = null,
     val commands: List<Command> = listOf(),
     var skin: Skin? = null,
-    var location: Location
+    var location: Location,
 ) {
     companion object {
         //        fun ConfigurationSection.getLocation(): Location {
@@ -33,15 +34,24 @@ data class EmpireNPC(
 //            return Location(Bukkit.getWorld(world),x,y,z,yaw,pitch)
 //        }
         fun getList(): List<EmpireNPC> {
-            val config = Files.configFile.getConfig().getConfigurationSection("npcs") ?: return listOf()
+            val config = Files.configFile.getConfig().getConfigurationSection("npcs") ?: run {
+                Logger.warn("Npc list is empty")
+                return emptyList()
+            }
             return config.getKeys(false).mapNotNull { id ->
-                val c = config.getConfigurationSection(id) ?: return@mapNotNull null
+                val c = config.getConfigurationSection(id) ?: run {
+                    Logger.warn("$id not exists")
+                    return@mapNotNull null
+                }
                 val name = c.getString("name")?.HEX()
                 val lines = c.getHEXStringList("lines")
                 val phrases = c.getHEXStringList("phrases")
                 val commands = Command.getCommands(c.getConfigurationSection("commands"))
                 val skin = Skin.getSkin(c.getConfigurationSection("skin"))
-                val location = c.getLocation("location") ?: return@mapNotNull null
+                val location = c.getLocation("location") ?: run {
+                    Logger.warn("Location is wrong: $id")
+                    return@mapNotNull null
+                }
                 EmpireNPC(
                     id = id,
                     name = name,
@@ -74,7 +84,7 @@ data class EmpireNPC(
 data class Command(
     val id: String,
     val command: String,
-    val asConsole: Boolean
+    val asConsole: Boolean,
 ) {
     companion object {
         fun getCommands(s: ConfigurationSection?): List<Command> =
@@ -90,7 +100,7 @@ data class Command(
 
 data class Skin(
     val value: String,
-    val signature: String
+    val signature: String,
 ) {
     companion object {
         fun getSkin(s: ConfigurationSection?): Skin? {

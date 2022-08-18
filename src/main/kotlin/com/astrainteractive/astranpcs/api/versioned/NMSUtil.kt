@@ -15,12 +15,6 @@ import org.bukkit.entity.Player
 
 object NMSUtil {
 
-    val version: String
-        get() {
-            val v = Bukkit.getServer().javaClass.getPackage().name
-            return v.substring(v.lastIndexOf('.') + 1)
-        }
-
     fun Player.connection(): PlayerConnection {
         return (this as CraftPlayer).handle.b
     }

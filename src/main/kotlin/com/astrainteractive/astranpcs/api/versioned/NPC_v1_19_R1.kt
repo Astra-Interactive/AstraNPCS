@@ -14,6 +14,7 @@ import com.astrainteractive.astranpcs.api.versioned.NMSUtil.worldServer
 import com.astrainteractive.astranpcs.data.EmpireNPC
 import com.astrainteractive.astranpcs.data.Skin
 import com.astrainteractive.astranpcs.utils.Config
+import com.astrainteractive.astranpcs.utils.IConfig
 import com.mojang.authlib.GameProfile
 import com.mojang.authlib.properties.Property
 import kotlinx.coroutines.delay
@@ -36,7 +37,9 @@ import java.util.*
 
 
 class NPC_v1_19_R1(override val empireNPC: EmpireNPC) : INPC {
-    private val config: Config = inject()!!
+    private val config: IConfig
+        get() = Config
+
     /**
      * Здесь хранится ссылка на NPC
      */
@@ -138,6 +141,7 @@ class NPC_v1_19_R1(override val empireNPC: EmpireNPC) : INPC {
 
     }
 
+
     /**
      * Спавним NPC в мир, ставим скин, ставим Армор Стенды и скрываем обычное имя над головой
      */
@@ -208,7 +212,7 @@ class NPC_v1_19_R1(override val empireNPC: EmpireNPC) : INPC {
 
     // GameProfile
     private fun setSkin(skin: Skin?) =
-        (entityPlayer as EntityHuman).fz().properties.put(
+        (entityPlayer as EntityHuman).fy().properties.put(
             "textures",
             Property("textures", skin?.value, skin?.signature)
         )
