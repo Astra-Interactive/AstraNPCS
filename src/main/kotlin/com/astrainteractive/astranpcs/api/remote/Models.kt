@@ -2,7 +2,7 @@ package com.astrainteractive.astranpcs.api.remote
 
 data class Profile(
     val name: String,
-    val uuid: String,
+    val id: String,
 )
 
 data class ProfileSkin(

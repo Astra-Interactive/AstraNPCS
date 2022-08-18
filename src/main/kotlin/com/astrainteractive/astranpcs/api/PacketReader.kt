@@ -1,7 +1,6 @@
 package com.astrainteractive.astranpcs.api
 
 import com.astrainteractive.astralibs.async.AsyncHelper
-import com.astrainteractive.astralibs.events.DSLEvent
 import com.astrainteractive.astralibs.utils.AstraPacketReader
 import io.netty.channel.Channel
 import net.minecraft.network.protocol.game.PacketPlayInUseEntity
@@ -10,10 +9,6 @@ import net.minecraft.world.phys.Vec3D
 import org.bukkit.Bukkit
 import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer
 import org.bukkit.entity.Player
-import org.bukkit.event.entity.PlayerDeathEvent
-import org.bukkit.event.player.PlayerJoinEvent
-import org.bukkit.event.player.PlayerQuitEvent
-import org.bukkit.event.player.PlayerRespawnEvent
 
 /**
  * Handling interactions on custom NPCS
@@ -34,14 +29,12 @@ object PacketReader : AstraPacketReader<PacketPlayInUseEntity>() {
         val typeField = getClassFieldValue(packet, typeFieldName)!!
         val enumHand: EnumHand =
             getClassFieldValue(typeField, typeField.javaClass.declaredFields.getOrNull(0)?.name ?: return) as EnumHand
-
         val vec3D: Vec3D =
             typeField.javaClass.declaredFields.getOrNull(1)?.let { getClassFieldValue(typeField, it.name) as? Vec3D }
                 ?: return
         if (enumHand != EnumHand.a) return
 
-        val npc = NPCManager.registeredNPCs.firstOrNull { it.id == id } ?: return
-        println("ID: ${id}; ${NPCManager.registeredNPCs.map { it.id }}")
+        val npc = NPCManager.registeredNPCs.firstOrNull { it.entityID == id } ?: return
         AsyncHelper.callSyncMethod {
             Bukkit.getPluginManager().callEvent(NPCInteractionEvent(player, npc))
         }

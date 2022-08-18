@@ -39,10 +39,10 @@ class AstraNPCS : JavaPlugin() {
             CommandManager()
             IFiles()
             IConfig.create()
+            remember(MojangApi(mojangApi))
             NPCManager.onEnable()
             ClickNpcEvent()
             PacketReader.onEnable()
-            remember(MojangApi(mojangApi))
         }
     }
 

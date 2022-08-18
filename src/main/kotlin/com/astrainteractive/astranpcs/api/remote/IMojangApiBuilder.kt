@@ -7,6 +7,7 @@ object IMojangApiBuilder {
     fun build() = RestRequester {
         this.baseUrl = ""
         this.converterFactory = { json, clazz ->
+//            println("Got json: $json and clazz: $clazz")
             json?.let { Gson().fromJson(json, clazz) }
         }
         this.decoderFactory = Gson()::toJson

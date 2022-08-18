@@ -58,14 +58,14 @@ class Anpc {
         if (args.size != 3)
             return
         val npc = NPCManager.npcByEmpireId(args[1]) ?: return
-        npc.setSkinByName(args[2] ?: return)
+        npc.loadSkinByName(args[2])
     }
 
     private fun moveNpcToPlayer(sender: Player, args: Array<out String>) {
         if (args.size != 2)
             return
         val npc = NPCManager.npcByEmpireId(args[1])
-        npc?.setLocation(sender.location)
+//        npc?.setLocation(sender.location)
     }
 
     private fun teleportToNpc(sender: Player, args: Array<out String>) {
@@ -73,7 +73,7 @@ class Anpc {
         if (args.size != 2)
             return
         val npc = NPCManager.npcByEmpireId(args[1])
-        sender.teleport(npc?.location ?: return)
+        sender.teleport(npc?.empireNPC?.location ?: return)
     }
 
 
@@ -105,7 +105,7 @@ class Anpc {
                 "name"
             ).contains(args[0])
         )
-            return@registerTabCompleter NPCManager.registeredNPCs.map { it.empireId }.withEntry(args[1])
+            return@registerTabCompleter NPCManager.registeredNPCs.map { it.empireNPC.id }.withEntry(args[1])
 
         return@registerTabCompleter listOf()
     }

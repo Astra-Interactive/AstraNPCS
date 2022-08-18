@@ -1,12 +1,16 @@
 package com.astrainteractive.astranpcs.api
 
-import com.astrainteractive.astranpcs.api.versioned.NPC_v1_19_R1
+import com.astrainteractive.astranpcs.api.versioned.AbstractNPC
+import com.astrainteractive.astranpcs.api.versioned.INpcController
+import com.astrainteractive.astranpcs.api.versioned.NPCController_1_19
 import com.astrainteractive.astranpcs.data.EmpireNPC
+import com.astrainteractive.astranpcs.utils.Config
+import com.astrainteractive.astranpcs.utils.IConfig
 
 object NPCManager {
-    val registeredNPCs: MutableSet<INPC> = HashSet<INPC>()
+    val registeredNPCs: MutableSet<AbstractNPC> = HashSet<AbstractNPC>()
     private val empireNPCs: MutableSet<EmpireNPC> = HashSet<EmpireNPC>()
-    fun npcByEmpireId(id: String) = registeredNPCs.firstOrNull { it.empireId == id }
+    fun npcByEmpireId(id: String) = registeredNPCs.firstOrNull { it.empireNPC.id == id }
     fun onEnable() {
         empireNPCs.apply {
             clear()
@@ -19,8 +23,16 @@ object NPCManager {
         }
     }
 
-    private fun createNPC(empireNPC: EmpireNPC): INPC {
-        val npc: INPC = NPC_v1_19_R1(empireNPC)
+    private fun createNPC(empireNPC: EmpireNPC): AbstractNPC {
+        val npc: AbstractNPC = object : AbstractNPC() {
+            override val config: IConfig
+                get() = Config
+            override val empireNPC: EmpireNPC
+                get() = empireNPC
+            override val npcController: INpcController
+                get() = NPCController_1_19
+
+        }
         registeredNPCs.add(npc)
         return npc
     }
