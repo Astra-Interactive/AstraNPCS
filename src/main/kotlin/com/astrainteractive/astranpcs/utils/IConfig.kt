@@ -12,7 +12,7 @@ class IConfig(
     companion object {
         lateinit var instance: IConfig
         fun create(): IConfig {
-            val c = Files.configFile.getConfig().getConfigurationSection("config") ?: return IConfig()
+            val c = Files.configFile.fileConfiguration.getConfigurationSection("config") ?: return IConfig()
             instance = IConfig(
                 c.getLong("distanceTrack", 10L),
                 c.getLong("distanceHide", 30L),

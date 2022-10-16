@@ -1,14 +1,17 @@
 package com.astrainteractive.astranpcs.api
 
-import com.astrainteractive.astralibs.async.AsyncHelper
-import com.astrainteractive.astralibs.utils.AstraPacketReader
 import io.netty.channel.Channel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import net.minecraft.network.protocol.game.PacketPlayInUseEntity
 import net.minecraft.world.EnumHand
 import net.minecraft.world.phys.Vec3D
 import org.bukkit.Bukkit
 import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer
 import org.bukkit.entity.Player
+import ru.astrainteractive.astralibs.async.BukkitMain
+import ru.astrainteractive.astralibs.async.PluginScope
+import ru.astrainteractive.astralibs.utils.AstraPacketReader
 
 /**
  * Handling interactions on custom NPCS
@@ -35,7 +38,7 @@ object PacketReader : AstraPacketReader<PacketPlayInUseEntity>() {
         if (enumHand != EnumHand.a) return
 
         val npc = NPCManager.registeredNPCs.firstOrNull { it.entityID == id } ?: return
-        AsyncHelper.callSyncMethod {
+        PluginScope.launch(Dispatchers.BukkitMain) {
             Bukkit.getPluginManager().callEvent(NPCInteractionEvent(player, npc))
         }
     }

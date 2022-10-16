@@ -1,6 +1,5 @@
 package com.astrainteractive.astranpcs.api.versioned
 
-import com.astrainteractive.astralibs.utils.HEX
 import com.astrainteractive.astranpcs.data.Skin
 import com.mojang.authlib.properties.Property
 import net.minecraft.network.protocol.Packet
@@ -21,6 +20,7 @@ import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer
 import org.bukkit.craftbukkit.v1_19_R1.util.CraftChatMessage
 import org.bukkit.entity.ArmorStand
 import org.bukkit.entity.Player
+import ru.astrainteractive.astralibs.utils.HEX
 
 object NPCController_1_19 : INpcController {
     override fun setLocation(ep: EntityPlayer, l: Location) {
@@ -37,7 +37,7 @@ object NPCController_1_19 : INpcController {
     override fun worldServer(location: Location): WorldServer = (location.world as CraftWorld).handle
 
     override fun setSkin(ep: EntityPlayer, skin: Skin?) {
-        (ep as EntityHuman).fy().properties.put(
+        (ep as EntityHuman).fz().properties.put(
             "textures",
             Property("textures", skin?.value, skin?.signature)
         )

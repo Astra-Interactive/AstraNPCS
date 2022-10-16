@@ -1,6 +1,9 @@
 package com.astrainteractive.astranpcs.api.remote
 
-import com.astrainteractive.astralibs.rest.*
+import ru.astrainteractive.astralibs.rest.Path
+import ru.astrainteractive.astralibs.rest.ProxyTask
+import ru.astrainteractive.astralibs.rest.Request
+import ru.astrainteractive.astralibs.rest.Response
 
 
 interface IMojangApi {

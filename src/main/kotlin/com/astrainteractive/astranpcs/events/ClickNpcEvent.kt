@@ -1,8 +1,8 @@
 package com.astrainteractive.astranpcs.events
 
-import com.astrainteractive.astralibs.events.DSLEvent
 import com.astrainteractive.astranpcs.api.NPCInteractionEvent
 import org.bukkit.Bukkit
+import ru.astrainteractive.astralibs.events.DSLEvent
 import kotlin.random.Random
 
 class ClickNpcEvent {

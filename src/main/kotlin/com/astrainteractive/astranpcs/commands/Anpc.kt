@@ -1,15 +1,16 @@
 package com.astrainteractive.astranpcs.commands
 
-import com.astrainteractive.astralibs.*
-import com.astrainteractive.astralibs.utils.registerCommand
-import com.astrainteractive.astralibs.utils.registerTabCompleter
-import com.astrainteractive.astralibs.utils.withEntry
 import com.astrainteractive.astranpcs.AstraNPCS
 import com.astrainteractive.astranpcs.api.NPCManager
 import com.astrainteractive.astranpcs.data.EmpireNPC
 import com.astrainteractive.astranpcs.utils.Permissions
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
+import ru.astrainteractive.astralibs.AstraLibs
+import ru.astrainteractive.astralibs.Logger
+import ru.astrainteractive.astralibs.utils.registerCommand
+import ru.astrainteractive.astralibs.utils.registerTabCompleter
+import ru.astrainteractive.astralibs.utils.withEntry
 
 class Anpc {
     var anpc = AstraLibs.registerCommand("anpc") { sender, args ->

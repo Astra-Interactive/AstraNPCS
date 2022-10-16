@@ -1,20 +1,20 @@
 package com.astrainteractive.astranpcs
 
-import com.astrainteractive.astralibs.AstraLibs
-import com.astrainteractive.astralibs.Logger
-import com.astrainteractive.astralibs.events.GlobalEventManager
-import com.astrainteractive.astralibs.utils.Injector.module
-import com.astrainteractive.astralibs.utils.Injector.remember
 import com.astrainteractive.astranpcs.api.NPCManager
 import com.astrainteractive.astranpcs.api.PacketReader
 import com.astrainteractive.astranpcs.api.remote.IMojangApiBuilder
 import com.astrainteractive.astranpcs.api.remote.MojangApi
 import com.astrainteractive.astranpcs.commands.CommandManager
 import com.astrainteractive.astranpcs.events.ClickNpcEvent
-import com.astrainteractive.astranpcs.utils.*
-import kotlinx.coroutines.*
+import com.astrainteractive.astranpcs.utils.IConfig
+import com.astrainteractive.astranpcs.utils.IFiles
+import kotlinx.coroutines.runBlocking
 import org.bukkit.event.HandlerList
 import org.bukkit.plugin.java.JavaPlugin
+import ru.astrainteractive.astralibs.AstraLibs
+import ru.astrainteractive.astralibs.Logger
+import ru.astrainteractive.astralibs.di.Injector.remember
+import ru.astrainteractive.astralibs.events.GlobalEventManager
 
 
 class AstraNPCS : JavaPlugin() {
@@ -35,7 +35,6 @@ class AstraNPCS : JavaPlugin() {
 
         AstraLibs.rememberPlugin(this)
         Logger.prefix = "AstraNPCS"
-        module {
             CommandManager()
             IFiles()
             IConfig.create()
@@ -43,7 +42,6 @@ class AstraNPCS : JavaPlugin() {
             NPCManager.onEnable()
             ClickNpcEvent()
             PacketReader.onEnable()
-        }
     }
 
     override fun onDisable() {

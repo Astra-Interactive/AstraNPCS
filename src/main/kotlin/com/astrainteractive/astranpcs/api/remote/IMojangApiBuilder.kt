@@ -1,7 +1,7 @@
 package com.astrainteractive.astranpcs.api.remote
 
-import com.astrainteractive.astralibs.rest.RestRequester
 import org.jetbrains.kotlin.com.google.gson.Gson
+import ru.astrainteractive.astralibs.rest.RestRequester
 
 object IMojangApiBuilder {
     fun build() = RestRequester {

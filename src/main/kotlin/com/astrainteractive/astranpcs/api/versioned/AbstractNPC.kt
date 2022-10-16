@@ -1,8 +1,5 @@
 package com.astrainteractive.astranpcs.api.versioned
 
-import com.astrainteractive.astralibs.async.AsyncHelper
-import com.astrainteractive.astralibs.utils.Injector.inject
-import com.astrainteractive.astralibs.utils.convertHex
 import com.astrainteractive.astranpcs.AstraTaskTimer
 import com.astrainteractive.astranpcs.api.NPCViewers
 import com.astrainteractive.astranpcs.api.remote.MojangApi
@@ -10,9 +7,7 @@ import com.astrainteractive.astranpcs.data.EmpireNPC
 import com.astrainteractive.astranpcs.data.Skin
 import com.astrainteractive.astranpcs.utils.IConfig
 import com.mojang.authlib.GameProfile
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import net.minecraft.network.protocol.game.*
 import net.minecraft.server.level.EntityPlayer
 import net.minecraft.server.level.WorldServer
@@ -22,6 +17,10 @@ import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import org.bukkit.scoreboard.NameTagVisibility
 import org.bukkit.scoreboard.Team
+import ru.astrainteractive.astralibs.async.BukkitMain
+import ru.astrainteractive.astralibs.async.PluginScope
+import ru.astrainteractive.astralibs.di.Injector.inject
+import ru.astrainteractive.astralibs.utils.convertHex
 import java.util.*
 
 
@@ -54,7 +53,7 @@ abstract class AbstractNPC {
 
     fun loadSkinByName(name: String) {
         despawn(false)
-        AsyncHelper.launch {
+        PluginScope.launch {
             val uuid = mojangAPI.fetchProfile(name)
             println(uuid)
 
@@ -63,7 +62,7 @@ abstract class AbstractNPC {
             }?.properties?.firstOrNull()?.let {
                 Skin(it.value, it.signature)
             }?.let{
-                AsyncHelper.callSyncMethod {
+                withContext(Dispatchers.BukkitMain) {
                     despawn(false)
                     setSkin(it)
                     spawn()
@@ -171,9 +170,9 @@ abstract class AbstractNPC {
             false
         )
         npcController.sendPacket(player, lookPacket)
-        AsyncHelper.launch {
+        PluginScope.launch {
             delay(config.removeListTime.toLong())
-            AsyncHelper.callSyncMethod {
+            withContext(Dispatchers.BukkitMain) {
                 npcController.sendPacket(player, npcController.removeFromTabPacket(entityPlayer))
             }
         }

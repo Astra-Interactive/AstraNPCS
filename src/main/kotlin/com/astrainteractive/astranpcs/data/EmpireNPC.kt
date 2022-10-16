@@ -1,16 +1,16 @@
 package com.astrainteractive.astranpcs.data
 
 
-import com.astrainteractive.astralibs.Logger
-import com.astrainteractive.astralibs.utils.HEX
-import com.astrainteractive.astralibs.utils.catching
-import com.astrainteractive.astralibs.utils.getHEXStringList
 import com.astrainteractive.astranpcs.AstraNPCS
 import com.astrainteractive.astranpcs.utils.Files
 import com.google.gson.JsonParser
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.configuration.ConfigurationSection
+import ru.astrainteractive.astralibs.Logger
+import ru.astrainteractive.astralibs.utils.HEX
+import ru.astrainteractive.astralibs.utils.catching
+import ru.astrainteractive.astralibs.utils.getHEXStringList
 import java.io.InputStreamReader
 import java.net.URL
 
@@ -34,7 +34,7 @@ data class EmpireNPC(
 //            return Location(Bukkit.getWorld(world),x,y,z,yaw,pitch)
 //        }
         fun getList(): List<EmpireNPC> {
-            val config = Files.configFile.getConfig().getConfigurationSection("npcs") ?: run {
+            val config = Files.configFile.fileConfiguration.getConfigurationSection("npcs") ?: run {
                 Logger.warn("Npc list is empty")
                 return emptyList()
             }
@@ -66,7 +66,7 @@ data class EmpireNPC(
     }
 
     fun save() {
-        val c = Files.configFile.getConfig()
+        val c = Files.configFile.fileConfiguration
         c.set("npcs.$id.name", name)
         c.set("npcs.$id.lines", lines)
         c.set("npcs.$id.phrases", phrases)
@@ -77,7 +77,7 @@ data class EmpireNPC(
         c.set("npcs.$id.skin.value", skin?.value)
         c.set("npcs.$id.skin.signature", skin?.signature)
         c.set("npcs.$id.location", location)
-        Files.configFile.saveConfig()
+        Files.configFile.save()
     }
 }
 

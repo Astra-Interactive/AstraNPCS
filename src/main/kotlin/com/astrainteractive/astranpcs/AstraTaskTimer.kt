@@ -1,14 +1,14 @@
 package com.astrainteractive.astranpcs
 
-import com.astrainteractive.astralibs.async.AsyncHelper
-import com.astrainteractive.astralibs.async.AsyncTask
 import kotlinx.coroutines.*
+import ru.astrainteractive.astralibs.async.AsyncTask
+import ru.astrainteractive.astralibs.async.PluginScope
 
 class AstraTaskTimer : AsyncTask {
     companion object {
         private val jobs: List<Job> = mutableListOf()
         suspend fun cancelJobs() {
-            val a: List<Deferred<Unit>> = jobs.map { AsyncHelper.async { it.cancelAndJoin() } }
+            val a: List<Deferred<Unit>> = jobs.map { PluginScope.async { it.cancelAndJoin() } }
             a.awaitAll()
         }
     }

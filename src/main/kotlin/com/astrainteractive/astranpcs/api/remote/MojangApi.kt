@@ -1,6 +1,7 @@
 package com.astrainteractive.astranpcs.api.remote
 
-import com.astrainteractive.astralibs.utils.catching
+import ru.astrainteractive.astralibs.utils.catching
+
 
 class MojangApi(val api: IMojangApi) {
     suspend fun fetchProfile(name: String): Profile? = catching(true) {
