@@ -8,7 +8,7 @@ import java.util.*
 object Dependencies {
     const val version = "1.0.2"
     const val group = "com.astrainteractive"
-    const val destinationDirectoryPath = "D:\\Minecraft Servers\\FarmWorld\\farm\\plugins"
+    const val destinationDirectoryPath = "D:\\Minecraft Servers\\TEST_SERVER\\plugins"
 
     object Kotlin {
         const val version = "1.7.0"
@@ -25,7 +25,7 @@ object Dependencies {
 
     object Spigot {
         const val velocity = "3.1.1"
-        const val version = "1.19-R0.1-SNAPSHOT"
+        const val version = "1.19.2-R0.1-SNAPSHOT"
         const val placeholderAPI = "2.11.2"
         const val protocolLib = "4.8.0"
         const val worldGuard = "7.0.7"

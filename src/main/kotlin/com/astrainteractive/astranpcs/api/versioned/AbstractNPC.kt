@@ -5,7 +5,8 @@ import com.astrainteractive.astranpcs.api.NPCViewers
 import com.astrainteractive.astranpcs.api.remote.MojangApi
 import com.astrainteractive.astranpcs.data.EmpireNPC
 import com.astrainteractive.astranpcs.data.Skin
-import com.astrainteractive.astranpcs.utils.IConfig
+import com.astrainteractive.astranpcs.data.Config
+import com.astrainteractive.astranpcs.utils.MojangAPIModule
 import com.mojang.authlib.GameProfile
 import kotlinx.coroutines.*
 import net.minecraft.network.protocol.game.*
@@ -19,15 +20,14 @@ import org.bukkit.scoreboard.NameTagVisibility
 import org.bukkit.scoreboard.Team
 import ru.astrainteractive.astralibs.async.BukkitMain
 import ru.astrainteractive.astralibs.async.PluginScope
-import ru.astrainteractive.astralibs.di.Injector.inject
 import ru.astrainteractive.astralibs.utils.convertHex
 import java.util.*
 
 
 abstract class AbstractNPC {
-    protected abstract val config: IConfig
+    protected abstract val config: Config
     abstract val empireNPC: EmpireNPC
-    protected val mojangAPI: MojangApi = inject()!!
+    protected val mojangAPI: MojangApi = MojangAPIModule.value
     protected val viewers: NPCViewers = NPCViewers()
     protected val entityPlayer: EntityPlayer = run {
         val profile = GameProfile(UUID.randomUUID(), empireNPC.id)

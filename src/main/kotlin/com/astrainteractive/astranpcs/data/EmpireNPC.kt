@@ -23,48 +23,6 @@ data class EmpireNPC(
     var skin: Skin? = null,
     var location: Location,
 ) {
-    companion object {
-        //        fun ConfigurationSection.getLocation(): Location {
-//            val world = getString("world")?:"world"
-//            val x = getDouble("x",0.0)
-//            val y = getDouble("y",0.0)
-//            val z = getDouble("z",0.0)
-//            val pitch = getFloat("pitch",0.0f)
-//            val yaw = getFloat("yaw",0.0f)
-//            return Location(Bukkit.getWorld(world),x,y,z,yaw,pitch)
-//        }
-        fun getList(): List<EmpireNPC> {
-            val config = Files.configFile.fileConfiguration.getConfigurationSection("npcs") ?: run {
-                Logger.warn("Npc list is empty")
-                return emptyList()
-            }
-            return config.getKeys(false).mapNotNull { id ->
-                val c = config.getConfigurationSection(id) ?: run {
-                    Logger.warn("$id not exists")
-                    return@mapNotNull null
-                }
-                val name = c.getString("name")?.HEX()
-                val lines = c.getHEXStringList("lines")
-                val phrases = c.getHEXStringList("phrases")
-                val commands = Command.getCommands(c.getConfigurationSection("commands"))
-                val skin = Skin.getSkin(c.getConfigurationSection("skin"))
-                val location = c.getLocation("location") ?: run {
-                    Logger.warn("Location is wrong: $id")
-                    return@mapNotNull null
-                }
-                EmpireNPC(
-                    id = id,
-                    name = name,
-                    lines = lines,
-                    phrases = phrases,
-                    commands = commands,
-                    skin = skin,
-                    location = location
-                )
-            }
-        }
-    }
-
     fun save() {
         val c = Files.configFile.fileConfiguration
         c.set("npcs.$id.name", name)
@@ -109,19 +67,6 @@ data class Skin(
                 s.getString("value") ?: return null,
                 s.getString("signature") ?: return null
             )
-        }
-
-        fun getSkinByName(name: String) = catching {
-            val url = URL("https://api.mojang.com/users/profiles/minecraft/$name")
-            val reader = InputStreamReader(url.openStream())
-            val uuid = JsonParser().parse(reader).asJsonObject.get("id").asString
-            val url2 = URL("https://sessionserver.mojang.com/session/minecraft/profile/$uuid?unsigned=false")
-            val reader2 = InputStreamReader(url2.openStream())
-            val property =
-                JsonParser().parse(reader2).asJsonObject.get("properties").asJsonArray.get(0).asJsonObject
-            val value = property.get("value").asString
-            val signature = property.get("signature").asString
-            Skin(value, signature)
         }
     }
 }

@@ -37,7 +37,7 @@ object NPCController_1_19 : INpcController {
     override fun worldServer(location: Location): WorldServer = (location.world as CraftWorld).handle
 
     override fun setSkin(ep: EntityPlayer, skin: Skin?) {
-        (ep as EntityHuman).fz().properties.put(
+        (ep as EntityHuman).fy().properties.put(
             "textures",
             Property("textures", skin?.value, skin?.signature)
         )
