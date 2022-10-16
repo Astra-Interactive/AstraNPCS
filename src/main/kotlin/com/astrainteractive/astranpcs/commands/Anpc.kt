@@ -2,8 +2,6 @@ package com.astrainteractive.astranpcs.commands
 
 import com.astrainteractive.astranpcs.AstraNPCS
 import com.astrainteractive.astranpcs.api.NPCManager
-import com.astrainteractive.astranpcs.data.AstraNPCYaml
-import com.astrainteractive.astranpcs.data.astraNPCYaml
 import com.astrainteractive.astranpcs.utils.Permissions
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
@@ -25,10 +23,6 @@ class Anpc {
         if (!Permissions.CreateNPC.hasPermission(sender))
             return@registerCommand
 
-        if (args.firstOrNull().equals("create", ignoreCase = true))
-            createNpc(sender, args)
-
-
         if (args.isNotEmpty() && args[0].equals("tp", ignoreCase = true))
             teleportToNpc(sender, args)
 
@@ -40,22 +34,6 @@ class Anpc {
 
     }
 
-    private fun createNpc(player: Player, args: Array<out String>) {
-        val location = player.location.clone()
-        val id = args.getOrNull(1)
-        if (id == null) {
-            player.sendMessage("${ChatColor.YELLOW}Вы не ввели ID")
-            return
-        }
-        val npc = AstraNPCYaml.YamlNPC(
-            id = id,
-            location = AstraNPCYaml.YamlNPC.YamlLocation.fromBukkitLocation(location)
-        )
-        astraNPCYaml.npcs[id] = npc
-        astraNPCYaml.save()
-        AstraNPCS.instance.reload()
-
-    }
 
     private fun setNpcSkin(sender: Player, args: Array<out String>) {
         if (args.size != 3)

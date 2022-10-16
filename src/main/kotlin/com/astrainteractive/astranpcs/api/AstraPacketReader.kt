@@ -1,6 +1,5 @@
 package com.astrainteractive.astranpcs.api
 
-import com.astrainteractive.astralibs.catching
 import io.netty.channel.Channel
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.MessageToMessageDecoder
@@ -10,6 +9,7 @@ import net.minecraft.network.protocol.game.PacketPlayInUseEntity
 import org.bukkit.Bukkit
 import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer
 import org.bukkit.entity.Player
+import ru.astrainteractive.astralibs.utils.catching
 import java.lang.reflect.Field
 import java.util.*
 import kotlin.collections.HashMap
