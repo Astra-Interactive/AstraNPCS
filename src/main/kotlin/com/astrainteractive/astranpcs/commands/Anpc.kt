@@ -1,6 +1,5 @@
 package com.astrainteractive.astranpcs.commands
 
-import com.astrainteractive.astralibs.*
 import com.astrainteractive.astranpcs.AstraNPCS
 import com.astrainteractive.astranpcs.api.NPCManager
 import com.astrainteractive.astranpcs.data.AstraNPCYaml
@@ -8,6 +7,11 @@ import com.astrainteractive.astranpcs.data.astraNPCYaml
 import com.astrainteractive.astranpcs.utils.Permissions
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
+import ru.astrainteractive.astralibs.AstraLibs
+import ru.astrainteractive.astralibs.Logger
+import ru.astrainteractive.astralibs.utils.registerCommand
+import ru.astrainteractive.astralibs.utils.registerTabCompleter
+import ru.astrainteractive.astralibs.utils.withEntry
 
 class Anpc {
     var anpc = AstraLibs.registerCommand("anpc") { sender, args ->
@@ -18,7 +22,7 @@ class Anpc {
         if (sender !is Player)
             return@registerCommand
 
-        if (!sender.hasPermission(Permissions.CREATE_NPC))
+        if (!Permissions.CreateNPC.hasPermission(sender))
             return@registerCommand
 
         if (args.firstOrNull().equals("create", ignoreCase = true))
@@ -57,14 +61,14 @@ class Anpc {
         if (args.size != 3)
             return
         val npc = NPCManager.npcByEmpireId(args[1]) ?: return
-        npc.setSkinByName(args[2] ?: return)
+        npc.loadSkinByName(args[2])
     }
 
     private fun moveNpcToPlayer(sender: Player, args: Array<out String>) {
         if (args.size != 2)
             return
         val npc = NPCManager.npcByEmpireId(args[1])
-        npc?.setLocation(sender.location)
+//        npc?.setLocation(sender.location)
     }
 
     private fun teleportToNpc(sender: Player, args: Array<out String>) {
@@ -72,7 +76,7 @@ class Anpc {
         if (args.size != 2)
             return
         val npc = NPCManager.npcByEmpireId(args[1])
-        sender.teleport(npc?.location ?: return)
+        sender.teleport(npc?.empireNPC?.location ?: return)
     }
 
 
@@ -104,7 +108,7 @@ class Anpc {
                 "name"
             ).contains(args[0])
         )
-            return@registerTabCompleter NPCManager.registeredNPCs.map { it.empireId }.withEntry(args[1])
+            return@registerTabCompleter NPCManager.registeredNPCs.map { it.empireNPC.id }.withEntry(args[1])
 
         return@registerTabCompleter listOf()
     }

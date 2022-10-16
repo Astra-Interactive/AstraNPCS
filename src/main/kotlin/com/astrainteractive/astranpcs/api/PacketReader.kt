@@ -1,19 +1,25 @@
 package com.astrainteractive.astranpcs.api
 
-import com.astrainteractive.astralibs.async.AsyncHelper
-import com.astrainteractive.astralibs.events.DSLEvent
+import io.netty.channel.Channel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import net.minecraft.network.protocol.game.PacketPlayInUseEntity
 import net.minecraft.world.EnumHand
 import net.minecraft.world.phys.Vec3D
 import org.bukkit.Bukkit
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer
 import org.bukkit.entity.Player
-import org.bukkit.event.entity.PlayerDeathEvent
-import org.bukkit.event.player.PlayerJoinEvent
-import org.bukkit.event.player.PlayerQuitEvent
-import org.bukkit.event.player.PlayerRespawnEvent
+import ru.astrainteractive.astralibs.async.BukkitMain
+import ru.astrainteractive.astralibs.async.PluginScope
+import ru.astrainteractive.astralibs.utils.AstraPacketReader
 
-
+/**
+ * Handling interactions on custom NPCS
+ */
 object PacketReader : AstraPacketReader<PacketPlayInUseEntity>() {
+
+    override val Player.provideChannel: Channel
+        get() = (this as CraftPlayer).handle.b.b.m
 
     override val clazz: Class<PacketPlayInUseEntity>
         get() = PacketPlayInUseEntity::class.java
@@ -26,30 +32,18 @@ object PacketReader : AstraPacketReader<PacketPlayInUseEntity>() {
         val typeField = getClassFieldValue(packet, typeFieldName)!!
         val enumHand: EnumHand =
             getClassFieldValue(typeField, typeField.javaClass.declaredFields.getOrNull(0)?.name ?: return) as EnumHand
-
         val vec3D: Vec3D =
             typeField.javaClass.declaredFields.getOrNull(1)?.let { getClassFieldValue(typeField, it.name) as? Vec3D }
                 ?: return
         if (enumHand != EnumHand.a) return
 
-        val npc = NPCManager.registeredNPCs.firstOrNull { it.id == id } ?: return
-        println("ID: ${id}; ${NPCManager.registeredNPCs.map { it.id }}")
-        AsyncHelper.callSyncMethod {
+        val npc = NPCManager.registeredNPCs.firstOrNull { it.entityID == id } ?: return
+        PluginScope.launch(Dispatchers.BukkitMain) {
             Bukkit.getPluginManager().callEvent(NPCInteractionEvent(player, npc))
         }
     }
 
-    val joinEvent = DSLEvent.event(PlayerJoinEvent::class.java) {
-        inject(it.player)
-    }
-    val respawnEvent = DSLEvent.event(PlayerRespawnEvent::class.java) {
-        inject(it.player)
-    }
-    val quitEvent = DSLEvent.event(PlayerQuitEvent::class.java) {
-        deInject(it.player.uniqueId)
-    }
-    val deathEvent = DSLEvent.event(PlayerDeathEvent::class.java) {
-        deInject(it.player.uniqueId)
-    }
+
+
 
 }
