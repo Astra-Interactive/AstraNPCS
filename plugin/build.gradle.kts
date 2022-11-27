@@ -1,4 +1,4 @@
-val name = "AstraNPCS"
+val pluginName = "AstraNPCS"
 group = Dependencies.group
 version = Dependencies.version
 description = "AstraNPCS"
@@ -97,7 +97,7 @@ tasks {
         from(sourceSets.main.get().resources.srcDirs) {
             filesMatching("plugin.yml") {
                 expand(
-                    "name" to project.name,
+                    "name" to pluginName,
                     "version" to project.version,
                     "description" to project.description
                 )
@@ -122,6 +122,7 @@ tasks.shadowJar {
     mergeServiceFiles()
     dependsOn(configurations)
     archiveClassifier.set(null as String?)
+    this.archiveBaseName.set(pluginName)
     from(sourceSets.main.get().output)
     from(project.configurations.runtimeClasspath)
     minimize()

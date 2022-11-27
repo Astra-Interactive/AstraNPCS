@@ -29,8 +29,17 @@ class AstraNPCS : JavaPlugin() {
         Logger.prefix = "AstraNPCS"
         CommandManager()
         ClickNpcEvent()
+        Files.configFile.reload()
+        configModule.reload()
+        mojangApiModule.value
+        npcsModule.reload()
+        npcManagerModule.reload()
+        npcManagerModule.value.onEnable()
+        packetReaderModule.reload()
+        packetReaderModule.value.onEnable()
 
-        reload()
+
+
     }
 
     override fun onDisable() {
@@ -43,20 +52,7 @@ class AstraNPCS : JavaPlugin() {
     }
 
     fun reload() {
-        Files.configFile.reload()
-        configModule.reload()
-        mojangApiModule.value
-        npcsModule.reload()
-
-        npcManagerModule.value.onDisable()
-        npcManagerModule.reload()
-        npcManagerModule.value.onEnable()
-
-        packetReaderModule.value.onDisable()
-        packetReaderModule.reload()
-        packetReaderModule.value.onEnable()
-        
-        runBlocking { AstraTaskTimer.cancelJobs() }
-
+        onDisable()
+        onEnable()
     }
 }
