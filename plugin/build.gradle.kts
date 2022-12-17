@@ -33,7 +33,6 @@ repositories {
     maven(Dependencies.Repositories.scarsz)
     maven(Dependencies.Repositories.maven2)
     modelEngige(project)
-    astraLibs(project)
     paperMC(project)
 }
 
@@ -97,7 +96,7 @@ tasks {
         from(sourceSets.main.get().resources.srcDirs) {
             filesMatching("plugin.yml") {
                 expand(
-                    "name" to pluginName,
+                    "name" to "AstraNpcs",
                     "version" to project.version,
                     "description" to project.description
                 )

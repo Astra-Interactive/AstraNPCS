@@ -38,7 +38,6 @@ class PacketReader(private val npcManager: NPCManager) : AstraPacketReader<Packe
             typeField.javaClass.declaredFields.getOrNull(1)?.let { getClassFieldValue(typeField, it.name) as? Vec3D }
                 ?: return
         if (enumHand != EnumHand.a) return
-        println("Clicked: $id; actualList: ${npcManager.registeredNPCs.map { it.entityID }}")
         val npc = npcManager.registeredNPCs.firstOrNull { it.entityID == id } ?: return
         PluginScope.launch(Dispatchers.BukkitMain) {
             Bukkit.getPluginManager().callEvent(NPCInteractionEvent(player, npc))

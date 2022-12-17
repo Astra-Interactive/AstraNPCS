@@ -52,9 +52,8 @@ abstract class AbstractNPC {
 
     fun loadSkinByName(name: String) {
         despawn(false)
-        PluginScope.launch {
+        PluginScope.launch(Dispatchers.IO) {
             val uuid = mojangAPI.fetchProfile(name)
-            println(uuid)
 
             mojangAPI.fetchProfile(name)?.id?.let { uuid ->
                 mojangAPI.fetchProfileSkin(uuid)
@@ -169,7 +168,7 @@ abstract class AbstractNPC {
             false
         )
         npcController.sendPacket(player, lookPacket)
-        PluginScope.launch {
+        PluginScope.launch(Dispatchers.IO) {
             delay(config.removeListTime.toLong())
             withContext(Dispatchers.BukkitMain) {
                 npcController.sendPacket(player, npcController.removeFromTabPacket(entityPlayer))

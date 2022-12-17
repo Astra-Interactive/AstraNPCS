@@ -1,5 +1,5 @@
 main: com.astrainteractive.astranpcs.AstraNPCS
-name: '${name}'
+name: 'AstraNpcs'
 version: '${version}'
 description: '${description}'
 author: MakeevRoman
