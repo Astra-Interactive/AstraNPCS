@@ -1,4 +1,6 @@
-# AsraNPCS-BETA
+# AsraNPCS-[ABANDONED]
+⚠️ The project is abandoned. I don't have time and energy for this plugin
+
 Lightweight NPC plugin written in Kotlin for Spigot servers
 
 
